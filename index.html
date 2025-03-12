@@ -1,15 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/style.css">
-    <script type="module" src="/js/app.js" defer></script>
-    <title>Document</title>
+    <title>Accueil - ABC Project</title>
+    <link rel="stylesheet" href="./assets/css/global.css">
+    <style>
+        .cta {
+            background-color: var(--couleur-bleu-fonce);
+            width: fit-content;
+            color: var(--couleur-gris);
+            padding-inline: 32px;
+            padding-block: 16px;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.5;
+        }
+
+        main {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1200px;
+            flex-flow: wrap;
+        }
+
+        main img {
+            max-width: 500px;
+            height: 100%;
+            padding-top: 80px;
+        }
+
+        body {
+            padding-inline: 1rem;
+        }
+    </style>
 </head>
 
 <body>
+    <header>
+        <div class="left">
+            <h1>Votre avenir commence ici</h1>
+            <p>Créer votre CV professionnelle en un Site Web</p>
+
+            <div>
+                <a href="./form.html">
+                    <div class="cta">
+                        Commencer dès maintenant !
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="logo">
+            <a href=" ./">
+                <img src="./assets/img/logo-medium.webp" alt="">
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <img src="Mock-up_1.png" alt="">
+        <img src="Mock-up_2.png" alt="">
+    </main>
 </body>
 
 </html>

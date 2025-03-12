@@ -1,0 +1,22 @@
+:root {
+    /* Theme1 */
+    --theme1-couleur1: #295E73;
+    --theme1-couleur2: #7EADBF;
+    --theme1-couleur3: #9CCED9;
+    --theme1-couleur4: #F2EAD0;
+    --theme1-couleur5: #F2F2F2;
+
+    /* Theme2 : Pastel */
+    --theme2-couleur1: #86A69D;
+    --theme2-couleur2: #F2B263;
+    --theme2-couleur3: #F2E8DF;
+    --theme2-couleur4: #F2C6C2;
+    --theme2-couleur5: #F28585;
+
+    /* Theme3 : Gryffondor */
+    --theme3-couleur1: #002642;
+    --theme3-couleur2: #78002E;
+    --theme3-couleur3: #E59500;
+    --theme3-couleur4: #E5DADA;
+    --theme3-couleur5: #FFFFFF;
+}

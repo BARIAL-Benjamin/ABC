@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire - ABC Project</title>
+    <link rel="stylesheet" href="./assets/css/global.css">
+    <style>
+        form {
+            display: flex;
+            flex-flow: column;
+            gap: 1rem;
+        }
+
+        form label {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            cursor: pointer;
+
+        }
+
+        form label input {
+            /* height: 40px; */
+            border: 2px solid var(--couleur-bleu-clair);
+            background-color: var(--couleur-beige);
+            padding-inline: .5rem;
+        }
+
+        input:focus {
+            outline: none;
+            border: 2px solid var(--couleur-bleu-fonce);
+        }
+
+        form button {
+            outline: none;
+            border: none;
+            background-color: var(--couleur-bleu-fonce);
+            color: var(--couleur-gris);
+            padding-inline: 32px;
+            padding-block: 16px;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.5;
+            cursor: pointer;
+            margin-bottom: 40px;
+        }
+
+        body {
+            padding-inline: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="left">
+            <h1>Formulaire de renseignements</h1>
+        </div>
+        <div class="logo">
+            <a href="./">
+                <img src="./assets/img/logo-medium.webp" alt="">
+            </a>
+        </div>
+    </header>
+    <main>
+        <h2>Choix du thème</h2>
+        <form id="theme">
+            <h3>Template</h3>
+            <label>
+                <input type="radio" name="choix_template">
+                Colonne a gauche
+            </label>
+            <label>
+                <input type="radio" name="choix_template">
+                De haut en bas sans colonne
+            </label>
+            <h3>Couleurs</h3>
+            <div class="form-group">
+                <label>
+                    <input type="radio" name="choix_couleur">
+                    <div class="theme theme1">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="radio" name="choix_couleur">
+                    <div class="theme theme2">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    <input type="radio" name="choix_couleur">
+                    <div class="theme theme3">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                </label>
+            </div>
+
+            <button>Visualiser</button>
+        </form>
+    </main>
+</body>
+
+</html>
