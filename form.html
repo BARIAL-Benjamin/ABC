@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulaire - ABC Project</title>
+    <link rel="stylesheet" href="./assets/css/global.css">
+    <style>
+        form {
+            display: flex;
+            flex-flow: column;
+            gap: 1rem;
+        }
+
+        form label {
+            display: flex;
+            flex-flow: column;
+            gap: .5rem;
+        }
+
+        form label input:not(input[type=file]),
+        form label textarea {
+            height: 40px;
+            border: 2px solid var(--couleur-bleu-clair);
+            background-color: var(--couleur-beige);
+            padding-inline: .5rem;
+        }
+
+        input:focus {
+            outline: none;
+            border: 2px solid var(--couleur-bleu-fonce);
+        }
+
+        form button {
+            outline: none;
+            border: none;
+            background-color: var(--couleur-bleu-fonce);
+            color: var(--couleur-gris);
+            padding-inline: 32px;
+            padding-block: 16px;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.5;
+            cursor: pointer;
+            margin-bottom: 40px;
+        }
+
+        body {
+            padding-inline: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="left">
+            <h1>Formulaire de renseignements</h1>
+        </div>
+        <div class="logo">
+            <a href="./">
+                <img src="./assets/img/logo-medium.webp" alt="">
+            </a>
+        </div>
+    </header>
+    <main>
+        <form id="user">
+            <label>
+                Poste
+                <input type="text" name="poste" placeholder="Développeur Web">
+            </label>
+            <label>
+                Introduction
+                <input type="text" name="introduction" placeholder="Passionné par le développement web...">
+            </label>
+            <!-- INFORMATIONS PERSONNELLES -->
+
+            <h2>Informations personnelles</h2>
+
+            <label>
+                Photo
+                <input type="file" name="photo">
+            </label>
+            <label>
+                Nom
+                <input type="text" name="lastname" placeholder="DURAND">
+            </label>
+            <label>
+                Prénom
+                <input type="text" name="firstname" placeholder="Jean">
+            </label>
+            <label>
+                Date de naissance
+                <input type="date" name="date_naissance">
+            </label>
+            <label>
+                Téléphone
+                <input type="text" name="tel" placeholder="06 12 34 56 78">
+            </label>
+            <label>
+                Email
+                <input type="text" name="mail" placeholder="jean.durand@example.com">
+            </label>
+            <label>
+                Localisation
+                <input type="text" name="address" placeholder="Paris, France">
+            </label>
+            <label>
+                Site Web
+                <input type="text" name="website" placeholder="https://example.com">
+            </label>
+            <label>
+                LinkedIn
+                <input type="text" name="linkedin" placeholder="your-name">
+            </label>
+            <label>
+                Twitter
+                <input type="text" name="twitter" placeholder="pseudo">
+            </label>
+            <label>
+                Permis
+                <input type="text" placeholder="Permis B">
+            </label>
+            <!-- REALISATIONS -->
+
+            <h2>Réalisations</h2>
+
+            <label for="">
+                Lien realisation 1
+                <input type="text" placeholder="https://github.com/jean-durand/projet1">
+            </label>
+            <label for="">
+                Lien realisation 2
+                <input type="text" placeholder="https://github.com/jean-durand/projet2025">
+            </label>
+            <!-- EXPERERIENCE PROFESSIONNELLE -->
+
+            <h2>Experience professionnelle</h2>
+
+            <div class="experiences">
+                <div class="experience">
+                    <h3>Experience professionnelle 1</h3>
+                    <label>
+                        Intitulé
+                        <input type="text" name="experience_intitule" placeholder="Développeur Front-end">
+                    </label>
+                    <label>
+                        Lieu
+                        <input type="text" name="experience_lieu" placeholder="Entreprise XYZ">
+                    </label>
+                    <label>
+                        Date Deb
+                        <input type="date" name="experience_date_deb" placeholder="">
+                    </label>
+                    <label>
+                        Date Fin
+                        <input type="date" placeholder="" name="experience_date_fin">
+                    </label>
+                    <label>
+                        Description
+                        <textarea type="text" name="experience_description"
+                            placeholder="Développement de fonctionnalités front-end..."></textarea>
+                    </label>
+                </div>
+                <div class="experience">
+                    <h3>Experience professionnelle 2</h3>
+                    <label>
+                        Intitulé
+                        <input type="text" name="experience_intitule" placeholder="Développeur Front-end">
+                    </label>
+                    <label>
+                        Lieu
+                        <input type="text" name="experience_lieu" placeholder="Entreprise XYZ">
+                    </label>
+                    <label>
+                        Date Deb
+                        <input type="date" name="experience_date_deb" placeholder="">
+                    </label>
+                    <label>
+                        Date Fin
+                        <input type="date" placeholder="" name="experience_date_fin">
+                    </label>
+                    <label>
+                        Description
+                        <textarea type="text" name="experience_description"
+                            placeholder="Développement de fonctionnalités front-end..."></textarea>
+                    </label>
+                </div>
+                <div class="experience">
+                    <h3>Experience professionnelle 3</h3>
+                    <label>
+                        Intitulé
+                        <input type="text" name="experience_intitule" placeholder="Développeur Front-end">
+                    </label>
+                    <label>
+                        Lieu
+                        <input type="text" name="experience_lieu" placeholder="Entreprise XYZ">
+                    </label>
+                    <label>
+                        Date Deb
+                        <input type="date" name="experience_date_deb" placeholder="">
+                    </label>
+                    <label>
+                        Date Fin
+                        <input type="date" placeholder="" name="experience_date_fin">
+                    </label>
+                    <label>
+                        Description
+                        <textarea type="text" name="experience_description"
+                            placeholder="Développement de fonctionnalités front-end..."></textarea>
+                    </label>
+                </div>
+                <div class="experience">
+                    <h3>Experience professionnelle 4</h3>
+                    <label>
+                        Intitulé
+                        <input type="text" name="experience_intitule" placeholder="Développeur Front-end">
+                    </label>
+                    <label>
+                        Lieu
+                        <input type="text" name="experience_lieu" placeholder="Entreprise XYZ">
+                    </label>
+                    <label>
+                        Date Deb
+                        <input type="date" name="experience_date_deb" placeholder="">
+                    </label>
+                    <label>
+                        Date Fin
+                        <input type="date" placeholder="" name="experience_date_fin">
+                    </label>
+                    <label>
+                        Description
+                        <textarea type="text" name="experience_description"
+                            placeholder="Développement de fonctionnalités front-end..."></textarea>
+                    </label>
+                </div>
+            </div>
+            <!-- ETUDES/FORMATIONS -->
+
+            <h2>Etudes</h2>
+
+            <div class="etudes">
+                <div class="etude">
+                    <h3>Etude 1</h3>
+                    <label>
+                        Intitulé
+                        <input type="text" name="etude_intitule" placeholder="Licence Informatique">
+                    </label>
+                    <label>
+                        Lieu
+                        <input type="text" name="etude_lieu" placeholder="Université ABC">
+                    </label>
+                    <label>
+                        Date debut
+                        <input type="date" name="etude_date_deb">
+                    </label>
+                    <label>
+                        Date Fin
+                        <input type="date" name="etude_date_fin">
+                    </label>
+                    <label>
+                        Description
+                        <textarea type="text" name="etude_description"
+                            placeholder="Étude des algorithmes, structures de données..."></textarea>
+                    </label>
+                </div>
+                <div class="etude">
+                    <h3>Etude 2</h3>
+                    <label>
+                        Intitulé
+                        <input type="text" name="etude_intitule" placeholder="Licence Informatique">
+                    </label>
+                    <label>
+                        Lieu
+                        <input type="text" name="etude_lieu" placeholder="Université ABC">
+                    </label>
+                    <label>
+                        Date debut
+                        <input type="date" name="etude_date_deb">
+                    </label>
+                    <label>
+                        Date Fin
+                        <input type="date" name="etude_date_fin">
+                    </label>
+                    <label>
+                        Description
+                        <textarea type="text" name="etude_description"
+                            placeholder="Étude des algorithmes, structures de données..."></textarea>
+                    </label>
+                </div>
+            </div>
+
+            <h2>Compétences</h2>
+
+            <div class="competences">
+                <div class="competence">
+                    <h3>Compétence 1</h3>
+                    <label>
+                        Nom
+                        <input type="text" name="competence_name" placeholder="nom de la compétence" data-competence>
+                    </label>
+                    <label>
+                        Description
+                        <input type="text" name="competence_description" placeholder="nom de la compétence"
+                            data-competence>
+                    </label>
+                </div>
+                <div class="competence">
+                    <h3>Compétence 2</h3>
+                    <label>
+                        Nom
+                        <input type="text" name="competence_name" placeholder="nom de la compétence" data-competence>
+                    </label>
+                    <label>
+                        Description
+                        <input type="text" name="competence_description" placeholder="nom de la compétence"
+                            data-competence>
+                    </label>
+                </div>
+                <div class="competence">
+                    <h3>Compétence 3</h3>
+                    <label>
+                        Nom
+                        <input type="text" name="competence_name" placeholder="nom de la compétence" data-competence>
+                    </label>
+                    <label>
+                        Description
+                        <input type="text" name="competence_description" placeholder="nom de la compétence"
+                            data-competence>
+                    </label>
+                </div>
+            </div>
+
+            <h2>Langues</h2>
+
+            <div class="form-group">
+                <label>
+                    Langue 1
+                    <input type="text" name="langue_name" data-langues placeholder="Nom de la langue">
+                </label>
+                <label>
+                    Niveau
+                    <input type="text" name="langue_level" data-langues placeholder="Novice/Moyen/Expert">
+                </label>
+            </div>
+            <div class="form-group">
+                <label>
+                    Langue 2
+                    <input type="text" name="langue_name" data-langues placeholder="Nom de la langue">
+                </label>
+                <label for="">
+                    Niveau
+                    <input type="text" name="langue_level" data-langues placeholder="Novice/Moyen/Expert">
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="langue3">
+                    Langue 3
+                    <input type="text" name="langue_name" data-langues placeholder="Nom de la langue">
+                </label>
+                <label for="">
+                    Niveau
+                    <input type="text" name="langue_level" data-langues placeholder="Novice/Moyen/Expert">
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="langue4">
+                    Langue 4
+                    <input type="text" name="langue_name" data-langues placeholder="Nom de la langue">
+                </label>
+                <label for="">
+                    Niveau
+                    <input type="text" name="langue_level" data-langues placeholder="Novice/Moyen/Expert">
+                </label>
+            </div>
+
+            <h2>Centres d'intérêts</h2>
+            <label>
+                Centres d'intérêts 1
+                <input type="text" name="interests" placeholder="Nom du centre d'intérêt">
+            </label>
+            <label>
+                Centres d'intérêts 2
+                <input type="text" name="interests" placeholder="Nom du centre d'intérêt">
+            </label>
+            <label>
+                Centres d'intérêts 3
+                <input type="text" name="interests" placeholder="Nom du centre d'intérêt">
+            </label>
+            <label>
+                Centres d'intérêts 4
+                <input type="text" name="interests" placeholder="Nom du centre d'intérêt">
+            </label>
+
+
+            <!-- <h2>Reseaux sociaux</h2> -->
+
+            <!-- <label>
+                LinkedIn
+                <input type="text" name="linkedin" data-social placeholder="your-name">
+            </label>
+
+            x-->
+
+            <button>Suivant</button>
+        </form>
+    </main>
+</body>
+
+</html>
