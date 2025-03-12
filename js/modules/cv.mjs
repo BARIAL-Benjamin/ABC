@@ -198,6 +198,20 @@ export default class CV {
 		save ? this.saveDataApp(theme, "theme", this.#app) : this.#app.theme = { ...this.#app.theme, ...theme };
 	}
 
+	setThemeByForm(form) {
+		const radio = form.querySelector('input[type="radio"]');
+		radio.addEventListener('change', () => {
+			switch (radio.name) {
+				case 'choix_couleur':
+					this.setThemeInfo({ palette: radio.value })
+					break;
+				case 'choix_template':
+					this.setThemeInfo({ template: radio.value })
+					break;
+			}
+		})
+	}
+
 	/** Récupère les informations relatif à l'utilisateur via un écoute d'un champ radio depuis un formulaire donnée
 	 * @param { HTMLFormElement } form
 	 */
@@ -339,7 +353,7 @@ export default class CV {
 					if (input.hasAttribute('data-social')) {
 						this.#app.user.social[key] = value;
 					} else if (input.hasAttribute('data-photo')) {
-						this.#app.user.photo = await this.convertImageToBase64(input.files[0]);
+						this.#app.user.photo = await CV.#convertImageToBase64(input.files[0]);
 					} else if (input.hasAttribute('data-competence')) {
 						this.#app.user.competence.push({ [key]: value });
 					} else if (input.hasAttribute('data-etude')) {
@@ -363,11 +377,10 @@ export default class CV {
 	 * @param {File} image Le fichier image à convertir
 	 * @returns Une promesse qui se résout avec la chaîne base64 de l'image
 	 */
-	async convertImageToBase64(image) {
-		return new Promise((resolve, reject) => {
+	static async #convertImageToBase64(image) {
+		return new Promise(_ => {
 			const r = new FileReader();
-			r.onloadend = () => resolve(r.result);
-			r.onerror = reject;
+			r.onloadend = () => _(r.result);
 			r.readAsDataURL(image);
 		});
 	}
