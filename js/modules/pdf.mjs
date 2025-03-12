@@ -48,11 +48,11 @@ export default class PDF {
 			content.style.backgroundImage = "none";
 			content.style.boxShadow = "none";
 
-			const canvas = await html2canvas(content);
-			const imgData = canvas.toDataURL(content, `image/${options?.format?.toLowerCase() ?? "webp"}`);
-			pdf.addImage(imgData, options.format, 0, 0);
+			const canvas = await html2canvas(content);			
+			const imgData = canvas.toDataURL(content, `image/${options.format?.toLowerCase() ?? "webp"}`);					
 
-			pdf.save(`${options.title}.pdf`);
+			pdf.addImage(imgData, options.format ?? "WEBP", 0, 0);
+			pdf.save(`${options.title ?? document.title}.pdf`);
 
 			for (const key in originalStyles) {
 				content.style[key] = originalStyles[key];
@@ -61,6 +61,9 @@ export default class PDF {
 			if (options.elementsToNotDisplay) options.elementsToNotDisplay.forEach((el) => (el.style.display = ""));
 		} catch (e) {
 			console.error(e);
+			const span = document.createElement('span');
+			span.textContent = "Impossible d'exporter le contenu en PDF";
+			content.append(span);
 		}
 	}
 
