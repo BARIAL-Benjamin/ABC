@@ -8,6 +8,8 @@
  * @property { string } [address]
  * @property { string } [interests]
  * @property { string } [date_naissance]
+ * @property { string } [introduction]
+ * @property { string } [permis]
  * @property { string } [photo] Stocker sous forme de texte en Base64
  * @property { SocialMedia } [social]
  * @property { Experience[] } [experience]
@@ -106,7 +108,8 @@ export default class CV {
 		'etude_date_deb', 'etude_date_fin', 'etude_lieu',
 		'etude_intitule', 'etude_description',
 		'experience_date_deb', 'experience_date_fin', 'experience_lieu',
-		'experience_intitule', 'experience_description', 'interests'
+		'experience_intitule', 'experience_description', 'interests',
+		'permis', 'introduction'
 	];
 
 	/**
@@ -268,6 +271,16 @@ export default class CV {
 				champs: select('span.firstname'),
 				value: user.firstname,
 				type: "firstname"
+			},
+			{
+				champs: select('span.permis'),
+				value: user.permis,
+				type: "permis"
+			},
+			{
+				champs: select('span.introduction'),
+				value: user.introduction,
+				type: "introduction"
 			},
 			{
 				champs: select('span.fullname'),
