@@ -5,8 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire - ABC Project</title>
-    <link rel="stylesheet" href="./assets/css/global.css">
-    <script type="module" src="./js/app.js" defer></script>
+    <link rel="stylesheet" href="/assets/css/global.css">
+    <script type="module" src="/js/app.js" defer></script>
     <style>
         form {
             display: flex;
@@ -59,95 +59,108 @@
             <h1>Formulaire de renseignements</h1>
         </div>
         <div class="logo">
-            <a href="./">
-                <img src="./assets/logo-medium.webp" alt="">
+            <a href="/">
+                <img src="/assets/logo-medium.webp" alt="Logo">
             </a>
         </div>
     </header>
     <main>
         <form id="user">
-            <label>
-                Poste
-                <input type="text" name="poste" placeholder="Développeur Web">
-            </label>
-            <label>
-                Introduction
-                <input type="text" name="introduction" placeholder="Passionné par le développement web...">
-            </label>
+            <!-- INFORMATIONS GENERALES -->
+            <h2>Informations générales</h2>
+            <div id="global">
+                <label>
+                    Poste
+                    <input type="text" name="poste" placeholder="Développeur Web">
+                </label>
+                <label>
+                    Introduction
+                    <input type="text" name="introduction" placeholder="Passionné par le développement web...">
+                </label>
+            </div>
+
             <!-- INFORMATIONS PERSONNELLES -->
-
             <h2>Informations personnelles</h2>
+            <div id="personal">
+                <label>
+                    Photo
+                    <input type="file" name="photo" data-photo>
+                </label>
+                <label>
+                    Nom
+                    <input type="text" name="lastname" placeholder="DURAND">
+                </label>
+                <label>
+                    Prénom
+                    <input type="text" name="firstname" placeholder="Jean">
+                </label>
+                <label>
+                    Date de naissance
+                    <input type="date" name="date_naissance">
+                </label>
+                <label>
+                    Téléphone
+                    <input type="text" name="tel" placeholder="06 12 34 56 78">
+                </label>
+                <label>
+                    Email
+                    <input type="text" name="mail" placeholder="jean.durand@example.com">
+                </label>
+                <label>
+                    Localisation
+                    <input type="text" name="address" placeholder="Paris, France">
+                </label>
+                <label>
+                    Centres d'intérêts
+                    <textarea type="text" name="interests" placeholder="Nom du centre d'intérêt"></textarea>
+                </label>
+                <label>
+                    Permis
+                    <input type="text" name="permis" placeholder="Permis B">
+                </label>
+            </div>
 
-            <label>
-                Photo
-                <input type="file" name="photo" data-photo>
-            </label>
-            <label>
-                Nom
-                <input type="text" name="lastname" placeholder="DURAND">
-            </label>
-            <label>
-                Prénom
-                <input type="text" name="firstname" placeholder="Jean">
-            </label>
-            <label>
-                Date de naissance
-                <input type="date" name="date_naissance">
-            </label>
-            <label>
-                Téléphone
-                <input type="text" name="tel" placeholder="06 12 34 56 78">
-            </label>
-            <label>
-                Email
-                <input type="text" name="mail" placeholder="jean.durand@example.com">
-            </label>
-            <label>
-                Localisation
-                <input type="text" name="address" placeholder="Paris, France">
-            </label>
-            <label>
-                Site Web
-                <input type="text" name="website" placeholder="https://example.com" data-social>
-            </label>
-            <label>
-                LinkedIn
-                <input type="text" name="linkedin" placeholder="your-name" data-social>
-            </label>
-            <label>
-                Twitter
-                <input type="text" name="twitter" placeholder="pseudo" data-social>
-            </label>
-            <label>
-                Permis
-                <input type="text" name="permis" placeholder="Permis B">
-            </label>
+            <!-- RESEAUX SOCIAUX -->
+            <h2>Reseaux sociaux</h2>
+            <div id="social">
+                <label>
+                    Site Web
+                    <input type="text" name="website" placeholder="https://example.com" data-social>
+                </label>
+                <label>
+                    LinkedIn
+                    <input type="text" name="linkedin" placeholder="your-name" data-social>
+                </label>
+                <label>
+                    Twitter
+                    <input type="text" name="twitter" placeholder="pseudo" data-social>
+                </label>
+            </div>
+
             <!-- EXPERERIENCE PROFESSIONNELLE -->
-
             <h2>Experience professionnelle</h2>
-
-            <div class="experiences">
+            <div id="experiences" class="experiences">
                 <div class="experience">
                     <h3>Experience professionnelle 1</h3>
                     <label>
                         Intitulé
-                        <input data-experience type="text" name="experience_intitule" placeholder="Développeur Front-end">
+                        <input type="text" name="experience_intitule" placeholder="Développeur Front-end">
                     </label>
                     <label>
                         Lieu
-                        <input data-experience type="text" name="experience_lieu" placeholder="Entreprise XYZ">
+                        <input type="text" name="experience_lieu" placeholder="Entreprise XYZ">
                     </label>
                     <label>
                         Date Deb
-                        <input data-experience type="date" name="experience_date_deb" placeholder="">
+                        <input type="date" name="experience_date_deb">
                     </label>
                     <label>
                         Date Fin
-                        <input data-experience type="date" placeholder="" name="experience_date_fin">
+                        <input type="date" name="experience_date_fin">
                     </label>
                     <label>
                         Description
-                        <textarea data-experience type="text" name="experience_description"
+                        <textarea type="text" name="experience_description"
                             placeholder="Développement de fonctionnalités front-end..."></textarea>
                     </label>
                 </div>
@@ -155,23 +168,23 @@
                     <h3>Experience professionnelle 2</h3>
                     <label>
                         Intitulé
-                        <input data-experience type="text" name="experience_intitule" placeholder="Développeur Front-end">
+                        <input type="text" name="experience_intitule" placeholder="Développeur Front-end">
                     </label>
                     <label>
                         Lieu
-                        <input data-experience type="text" name="experience_lieu" placeholder="Entreprise XYZ">
+                        <input type="text" name="experience_lieu" placeholder="Entreprise XYZ">
                     </label>
                     <label>
                         Date Deb
-                        <input data-experience type="date" name="experience_date_deb" placeholder="">
+                        <input type="date" name="experience_date_deb">
                     </label>
                     <label>
                         Date Fin
-                        <input data-experience type="date" placeholder="" name="experience_date_fin">
+                        <input type="date" name="experience_date_fin">
                     </label>
                     <label>
                         Description
-                        <textarea data-experience type="text" name="experience_description"
+                        <textarea type="text" name="experience_description"
                             placeholder="Développement de fonctionnalités front-end..."></textarea>
                     </label>
                 </div>
@@ -179,23 +192,23 @@
                     <h3>Experience professionnelle 3</h3>
                     <label>
                         Intitulé
-                        <input data-experience type="text" name="experience_intitule" placeholder="Développeur Front-end">
+                        <input type="text" name="experience_intitule" placeholder="Développeur Front-end">
                     </label>
                     <label>
                         Lieu
-                        <input data-experience type="text" name="experience_lieu" placeholder="Entreprise XYZ">
+                        <input type="text" name="experience_lieu" placeholder="Entreprise XYZ">
                     </label>
                     <label>
                         Date Deb
-                        <input data-experience type="date" name="experience_date_deb" placeholder="">
+                        <input type="date" name="experience_date_deb">
                     </label>
                     <label>
                         Date Fin
-                        <input data-experience type="date" placeholder="" name="experience_date_fin">
+                        <input type="date" name="experience_date_fin">
                     </label>
                     <label>
                         Description
-                        <textarea data-experience type="text" name="experience_description"
+                        <textarea type="text" name="experience_description"
                             placeholder="Développement de fonctionnalités front-end..."></textarea>
                     </label>
                 </div>
@@ -203,53 +216,52 @@
                     <h3>Experience professionnelle 4</h3>
                     <label>
                         Intitulé
-                        <input data-experience type="text" name="experience_intitule" placeholder="Développeur Front-end">
+                        <input type="text" name="experience_intitule" placeholder="Développeur Front-end">
                     </label>
                     <label>
                         Lieu
-                        <input data-experience type="text" name="experience_lieu" placeholder="Entreprise XYZ">
+                        <input type="text" name="experience_lieu" placeholder="Entreprise XYZ">
                     </label>
                     <label>
                         Date Deb
-                        <input data-experience type="date" name="experience_date_deb" placeholder="">
+                        <input type="date" name="experience_date_deb">
                     </label>
                     <label>
                         Date Fin
-                        <input data-experience type="date" placeholder="" name="experience_date_fin">
+                        <input type="date" name="experience_date_fin">
                     </label>
                     <label>
                         Description
-                        <textarea data-experience type="text" name="experience_description"
+                        <textarea type="text" name="experience_description"
                             placeholder="Développement de fonctionnalités front-end..."></textarea>
                     </label>
                 </div>
             </div>
+
             <!-- ETUDES/FORMATIONS -->
-
             <h2>Etudes</h2>
-
-            <div class="etudes">
+            <div id="etudes" class="etudes">
                 <div class="etude">
                     <h3>Etude 1</h3>
                     <label>
                         Intitulé
-                        <input data-etude type="text" name="etude_intitule" placeholder="Licence Informatique">
+                        <input type="text" name="etude_intitule" placeholder="Licence Informatique">
                     </label>
                     <label>
                         Lieu
-                        <input data-etude type="text" name="etude_lieu" placeholder="Université ABC">
+                        <input type="text" name="etude_lieu" placeholder="Université ABC">
                     </label>
                     <label>
                         Date debut
-                        <input data-etude type="date" name="etude_date_deb">
+                        <input type="date" name="etude_date_deb">
                     </label>
                     <label>
                         Date Fin
-                        <input data-etude type="date" name="etude_date_fin">
+                        <input type="date" name="etude_date_fin">
                     </label>
                     <label>
                         Description
-                        <textarea data-etude type="text" name="etude_description"
+                        <textarea type="text" name="etude_description"
                             placeholder="Étude des algorithmes, structures de données..."></textarea>
                     </label>
                 </div>
@@ -257,126 +269,113 @@
                     <h3>Etude 2</h3>
                     <label>
                         Intitulé
-                        <input data-etude type="text" name="etude_intitule" placeholder="Licence Informatique">
+                        <input type="text" name="etude_intitule" placeholder="Licence Informatique">
                     </label>
                     <label>
                         Lieu
-                        <input data-etude type="text" name="etude_lieu" placeholder="Université ABC">
+                        <input type="text" name="etude_lieu" placeholder="Université ABC">
                     </label>
                     <label>
                         Date debut
-                        <input data-etude type="date" name="etude_date_deb">
+                        <input type="date" name="etude_date_deb">
                     </label>
                     <label>
                         Date Fin
-                        <input data-etude type="date" name="etude_date_fin">
+                        <input type="date" name="etude_date_fin">
                     </label>
                     <label>
                         Description
-                        <textarea data-etude type="text" name="etude_description"
+                        <textarea type="text" name="etude_description"
                             placeholder="Étude des algorithmes, structures de données..."></textarea>
                     </label>
                 </div>
             </div>
 
+            <!-- COMPETENCES -->
             <h2>Compétences</h2>
-
-            <div class="competences">
+            <div id="competences" class="competences">
                 <div class="competence">
                     <h3>Compétence 1</h3>
                     <label>
                         Nom
-                        <input type="text" name="competence_name" placeholder="nom de la compétence" data-competence>
+                        <input type="text" name="competence_name" placeholder="nom de la compétence">
                     </label>
                     <label>
                         Description
-                        <input type="text" name="competence_description" placeholder="nom de la compétence"
-                            data-competence>
+                        <textarea type="text" name="competence_description"
+                            placeholder="nom de la compétence"></textarea>
                     </label>
                 </div>
                 <div class="competence">
                     <h3>Compétence 2</h3>
                     <label>
                         Nom
-                        <input type="text" name="competence_name" placeholder="nom de la compétence" data-competence>
+                        <input type="text" name="competence_name" placeholder="nom de la compétence">
                     </label>
                     <label>
                         Description
-                        <input type="text" name="competence_description" placeholder="nom de la compétence"
-                            data-competence>
+                        <textarea type="text" name="competence_description"
+                            placeholder="nom de la compétence"></textarea>
                     </label>
                 </div>
                 <div class="competence">
                     <h3>Compétence 3</h3>
                     <label>
                         Nom
-                        <input type="text" name="competence_name" placeholder="nom de la compétence" data-competence>
+                        <textarea type="text" name="competence_name" placeholder="nom de la compétence"></textarea>
                     </label>
                     <label>
                         Description
-                        <input type="text" name="competence_description" placeholder="nom de la compétence"
-                            data-competence>
+                        <textarea type="text" name="competence_description"
+                            placeholder="nom de la compétence"></textarea>
                     </label>
                 </div>
             </div>
 
+            <!-- LANGUES -->
             <h2>Langues</h2>
-
-            <div class="form-group">
-                <label>
-                    Langue 1
-                    <input type="text" name="langue_name" data-langues placeholder="Nom de la langue">
-                </label>
-                <label>
-                    Niveau
-                    <input type="text" name="langue_level" data-langues placeholder="Novice/Moyen/Expert">
-                </label>
+            <div id="langues" class="langues">
+                <div class="langue">
+                    <label>
+                        Langue 1
+                        <input type="text" name="langue_name" placeholder="Nom de la langue">
+                    </label>
+                    <label>
+                        Niveau
+                        <input type="text" name="langue_level" placeholder="Novice/Moyen/Expert">
+                    </label>
+                </div>
+                <div class="langue">
+                    <label>
+                        Langue 2
+                        <input type="text" name="langue_name" placeholder="Nom de la langue">
+                    </label>
+                    <label for="">
+                        Niveau
+                        <input type="text" name="langue_level" placeholder="Novice/Moyen/Expert">
+                    </label>
+                </div>
+                <div class="langue">
+                    <label for="langue3">
+                        Langue 3
+                        <input type="text" name="langue_name" placeholder="Nom de la langue">
+                    </label>
+                    <label for="">
+                        Niveau
+                        <input type="text" name="langue_level" placeholder="Novice/Moyen/Expert">
+                    </label>
+                </div>
+                <div class="langue">
+                    <label for="langue4">
+                        Langue 4
+                        <input type="text" name="langue_name" placeholder="Nom de la langue">
+                    </label>
+                    <label for="">
+                        Niveau
+                        <input type="text" name="langue_level" placeholder="Novice/Moyen/Expert">
+                    </label>
+                </div>
             </div>
-            <div class="form-group">
-                <label>
-                    Langue 2
-                    <input type="text" name="langue_name" data-langues placeholder="Nom de la langue">
-                </label>
-                <label for="">
-                    Niveau
-                    <input type="text" name="langue_level" data-langues placeholder="Novice/Moyen/Expert">
-                </label>
-            </div>
-            <div class="form-group">
-                <label for="langue3">
-                    Langue 3
-                    <input type="text" name="langue_name" data-langues placeholder="Nom de la langue">
-                </label>
-                <label for="">
-                    Niveau
-                    <input type="text" name="langue_level" data-langues placeholder="Novice/Moyen/Expert">
-                </label>
-            </div>
-            <div class="form-group">
-                <label for="langue4">
-                    Langue 4
-                    <input type="text" name="langue_name" data-langues placeholder="Nom de la langue">
-                </label>
-                <label for="">
-                    Niveau
-                    <input type="text" name="langue_level" data-langues placeholder="Novice/Moyen/Expert">
-                </label>
-            </div>
-
-            <h2>Centres d'intérêts</h2>
-            <label>
-                <textarea type="text" name="interests" placeholder="Nom du centre d'intérêt"></textarea>
-            </label>
-
-
-            <!-- <h2>Reseaux sociaux</h2> -->
-
-            <!-- <label>
-                LinkedIn
-                <input type="text" name="linkedin" data-social placeholder="your-name">
-            </label>
-
-            x-->
 
             <input type="submit" value="Suivant">
         </form>

@@ -100,16 +100,13 @@
 export default class CV {
 	static #APP = "ABC";
 	static #userInputs = [
-		'lastname', 'firstname', 'poste',
-		'address', 'tel', 'mail', 'linkedin',
-		'twitter', 'website', 'date_naissance',
-		"photo", 'langue_name', 'langue_level',
-		'competence_name', 'competence_description',
-		'etude_date_deb', 'etude_date_fin', 'etude_lieu',
-		'etude_intitule', 'etude_description',
-		'experience_date_deb', 'experience_date_fin', 'experience_lieu',
-		'experience_intitule', 'experience_description', 'interests',
-		'permis', 'introduction'
+		'poste', 'introduction', // general
+		'lastname', 'firstname', 'address', 'tel', 'mail', 'date_naissance', "photo", 'permis', 'interests', // personal
+		'linkedin', 'twitter', 'website', // social
+		'langue_name', 'langue_level', // langue
+		'competence_name', 'competence_description', // competences
+		'etude_date_deb', 'etude_date_fin', 'etude_lieu', 'etude_intitule', 'etude_description', // etudes
+		'experience_date_deb', 'experience_date_fin', 'experience_lieu', 'experience_intitule', 'experience_description' // experiences
 	];
 
 	/**
@@ -125,6 +122,11 @@ export default class CV {
 		this.#storage = options.storage ?? localStorage;
 		this.#app = this.#getDataAppFromStorage() ?? {}; // On récupère les données depuis le store sinon on créer un nouveau
 		this.#app.user = options.user ?? this.#app.user ?? {}; // Si ce paramètre est définit alors on l'applique sinon on garde l'original
+		this.#app.user.social ??= {};
+		this.#app.user.experience ??= {};
+		this.#app.user.etude ??= {};
+		this.#app.user.competence ??= {};
+		this.#app.user.langue ??= {};
 		this.#app.theme = options.theme ?? this.#app.theme ?? {}; // Si ce paramètre est définit alors on l'applique sinon on garde l'original
 	}
 
@@ -206,19 +208,36 @@ export default class CV {
 	 * @param { HTMLFormElement } form
 	 */
 	setThemeByForm(form) {
-		const radio = form.querySelector('input[type="radio"]');
-		if (radio) {
-			radio.addEventListener('change', () => {
-				switch (radio.name) {
-					case 'choix_couleur':
-						this.setThemeInfo({ palette: `./themes/palette/${radio.value}/style.css` })
-						break;
-					case 'choix_template':
-						this.setThemeInfo({ template: `./themes/template/${radio.value}/style.css` })
-						break;
-				}
-			});
-		}
+		const templates = form.querySelector('#templates');
+		const palettes = form.querySelector('#couleurs');
+		/**
+		 * @type { NodeListOf<HTMLInputElement> }
+		 */
+		const templatesRadios = templates.querySelectorAll('input[name="choix_template"]');
+		/**
+		 * @type { NodeListOf<HTMLInputElement> }
+		 */
+		const palettesRadios = palettes.querySelectorAll('input[name="choix_couleur"]');
+
+		templatesRadios.forEach(radio => {
+			if (radio) {
+				radio.addEventListener('change', () => {
+					const value = radio.getAttribute('data-template');
+					if (value) this.setThemeInfo({ template: `./themes/templates/${value}/index.html` })
+				})
+			}
+		})
+
+		palettesRadios.forEach(radio => {
+			if (radio) {
+				radio.addEventListener('change', () => {
+					const value = radio.getAttribute('data-palette');
+					if (value) this.setThemeInfo({ palette: `./themes/palette/${value}/style.css` })
+				})
+			}
+		})
+
+		form.addEventListener('submit', e => { e.preventDefault(); location.href = './preview.html' })
 	}
 
 	/** Récupère les informations relatif à l'utilisateur via un écoute d'un champ radio depuis un formulaire donnée
@@ -403,38 +422,131 @@ export default class CV {
 		form.addEventListener('submit', e => {
 			e.preventDefault();
 
-			form.querySelectorAll('input').forEach(async input => {
+			const global = form.querySelector('#global');
+			const personal = form.querySelector('#personal');
+			const experiences = form.querySelector('#experiences');
+			const competences = form.querySelector('#competences');
+			const langues = form.querySelector('#langues');
+			const social = form.querySelector('#social');
+			const etudes = form.querySelector('#etudes');
+
+			global.querySelectorAll('input').forEach(input => {
 				const key = input.name;
-				const value = input.value;
-
-				if (CV.#userInputs.includes(key)) {
-					this.#app.user.social ??= {};
-					this.#app.user.experience ??= {};
-					this.#app.user.etude ??= {};
-					this.#app.user.competence ??= {};
-					this.#app.user.langue ??= {};
-
-					if (input.hasAttribute('data-social')) {
-						this.#app.user.social[key] = value;
-					} else if (input.hasAttribute('data-photo')) {						
-						this.#app.user.photo = await CV.#convertImageToBase64(input.files[0]);
-					} else if (input.hasAttribute('data-competence')) {
-						this.#app.user.competence.push({ [key]: value });
-					} else if (input.hasAttribute('data-etude')) {
-						this.#app.user.etude.push({ [key]: value });
-					} else if (input.hasAttribute('data-experience')) {
-						this.#app.user.experience.push({ [key]: value });
-					} else if (input.hasAttribute('data-langues')) {
-						this.#app.user.langue.push({ [key]: value });
-					} else {
-						this.#app.user[key] = value;
-					}
-				}
+				if (CV.#userInputs.includes(key)) this.#app.user[key] = input.value;
 			});
 
+			social.querySelectorAll('input').forEach(input => {
+				const key = input.name;
+				if (CV.#userInputs.includes(key)) this.#app.user.social[key] = input.value;
+			});
+
+			personal.querySelectorAll('input').forEach(async input => {
+
+				if (CV.#userInputs.includes(input.name)) this.#app.user.photo = await CV.#convertImageToBase64(input.files[0]);
+			});
+
+			this.#app.user.experience = this.#getExperiencesFromElement(experiences);
+			this.#app.user.competence = this.#getCompetencesFromElement(competences);
+			this.#app.user.langue = this.#getLanguesFromElement(langues);
+			this.#app.user.etude = this.#getEtudesFromElement(etudes);
+
 			this.#saveDataAppToStorage();
-			// location.href = "./theme.form.html";
+			location.href = "./theme.form.html";
 		});
+	}
+
+	/** Récupère les langues du formulaire
+	 * @param { HTMLElement } element - Élément de référence contenant les langues
+	 * @returns { Langue[] } - Un tableau d'objets représentant les langues
+	 */
+	#getLanguesFromElement(element) {
+		/**
+		 * @type { Langue[] }
+		 */
+		const langues = [];
+		if (element) {
+			element.querySelectorAll('.langue').forEach(el => {
+				if (el) {
+					langues.push({
+						nom: el.querySelector('input[name="langue_name"]')?.value,
+						niveau: el.querySelector('input[name="langue_level"]')?.value
+					});
+				}
+			});
+		}
+		return langues;
+	}
+
+	/** Récupère les études du formulaire
+	 * @param { HTMLElement } element - Élément de référence contenant les études
+	 * @returns { Etude[] } - Un tableau d'objets représentant les études
+	 */
+	#getEtudesFromElement(element) {
+		/**
+		 * @type { Etude[] }
+		 */
+		const etudes = [];
+		if (element) {
+			element.querySelectorAll('.etude').forEach(el => {
+				if (el) {
+					etudes.push({
+						date_deb: el.querySelector('input[name="etude_date_deb"]')?.value,
+						date_fin: el.querySelector('input[name="etude_date_fin"]')?.value,
+						lieu: el.querySelector('input[name="etude_lieu"]')?.value,
+						intitule: el.querySelector('input[name="etude_intitule"]')?.value,
+						description: el.querySelector('textarea[name="etude_description"]')?.value
+					});
+				}
+			});
+		}
+		return etudes;
+	}
+
+	/** Récupère les compétences du formulaire
+	 * @param { HTMLElement } element - Élément de référence contenant les compétences
+	 * @returns { Competence[] } - Un tableau d'objets représentant les compétences
+	 */
+	#getCompetencesFromElement(element) {
+		/**
+		 * @type { Competence[] }
+		 */
+		const competences = [];
+		if (element) {
+			element.querySelectorAll('.competence').forEach(el => {
+				if (el) {
+					competences.push({
+						nom: el.querySelector('input[name="competence_name"]')?.value,
+						description: el.querySelector('textarea[name="competence_description"]')?.value
+					});
+				}
+			});
+		}
+		return competences;
+	}
+
+	/** Récupère les expériences professionnelles du formulaire
+	 * @param { HTMLElement } element - Élément de référence contenant les expériences professionnelles
+	 * @returns { Experience[] } - Un tableau d'objets représentant les expériences professionnelles
+	 */
+	#getExperiencesFromElement(element) {
+		/**
+		 * @type { Experience[] }
+		 */
+		const experiences = [];
+		if (element) {
+			element.querySelectorAll('.experience').forEach(el => {
+				if (el) {
+					experiences.push({
+						intitule: el.querySelector('input[name="experience_intitule"]')?.value,
+						lieu: el.querySelector('input[name="experience_lieu"]')?.value,
+						date_deb: el.querySelector('input[name="experience_date_deb"]')?.value,
+						date_fin: el.querySelector('input[name="experience_date_fin"]')?.value,
+						description: el.querySelector('textarea[name="experience_description"]')?.value
+					});
+				}
+			});
+		}
+		return experiences;
 	}
 
 	/** Export le CV au format PDF

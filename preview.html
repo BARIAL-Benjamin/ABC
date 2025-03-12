@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preview - ABC Project</title>
+    <link rel="stylesheet" href="/assets/css/global.css">
+    <script type="module" src="/js/app.js" defer></script>
+    <style>
+        form {
+            display: flex;
+            flex-flow: column;
+            gap: 1rem;
+        }
+
+        form label {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            cursor: pointer;
+
+        }
+
+        form label input {
+            /* height: 40px; */
+            border: 2px solid var(--couleur-bleu-clair);
+            background-color: var(--couleur-beige);
+            padding-inline: .5rem;
+        }
+
+        input:focus {
+            outline: none;
+            border: 2px solid var(--couleur-bleu-fonce);
+        }
+
+        form input[type="submit"] {
+            outline: none;
+            border: none;
+            background-color: var(--couleur-bleu-fonce);
+            color: var(--couleur-gris);
+            padding-inline: 32px;
+            padding-block: 16px;
+            font-size: 20px;
+            font-weight: 700;
+            line-height: 1.5;
+            cursor: pointer;
+            margin-bottom: 40px;
+        }
+
+        body {
+            padding-inline: 1rem;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="left">
+            <h1>Pré-visualisation</h1>
+        </div>
+        <div class="logo">
+            <a href="/">
+                <img src="/assets/logo-medium.webp" alt="Logo">
+            </a>
+        </div>
+    </header>
+    <main>
+        <div id="preview"></div>
+    </main>
+</body>
+
+</html>

@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulaire - ABC Project</title>
-    <link rel="stylesheet" href="./assets/css/global.css">
+    <link rel="stylesheet" href="/assets/css/global.css">
+    <script type="module" src="/js/app.js" defer></script>
     <style>
         form {
             display: flex;
@@ -33,7 +34,7 @@
             border: 2px solid var(--couleur-bleu-fonce);
         }
 
-        form button {
+        form input[type="submit"] {
             outline: none;
             border: none;
             background-color: var(--couleur-bleu-fonce);
@@ -59,8 +60,8 @@
             <h1>Formulaire de renseignements</h1>
         </div>
         <div class="logo">
-            <a href="./">
-                <img src="./assets/img/logo-medium.webp" alt="">
+            <a href="/">
+                <img src="/assets/logo-medium.webp" alt="Logo">
             </a>
         </div>
     </header>
@@ -68,53 +69,56 @@
         <h2>Choix du thème</h2>
         <form id="theme">
             <h3>Template</h3>
-            <label>
-                <input type="radio" name="choix_template">
-                Colonne a gauche
-            </label>
-            <label>
-                <input type="radio" name="choix_template">
-                De haut en bas sans colonne
-            </label>
+            <div id="templates">
+                <label>
+                    <input type="radio" name="choix_template" data-template="1">
+                    Colonne a gauche
+                </label>
+                <label>
+                    <input type="radio" name="choix_template" data-template="2">
+                    De haut en bas sans colonne
+                </label>
+            </div>
             <h3>Couleurs</h3>
-            <div class="form-group">
-                <label>
-                    <input type="radio" name="choix_couleur">
-                    <div class="theme theme1">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </label>
+            <div id="couleurs">
+                <div class="form-group">
+                    <label>
+                        <input type="radio" name="choix_couleur" data-palette="1">
+                        <div class="theme theme1">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="radio" name="choix_couleur" data-palette="2">
+                        <div class="theme theme2">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label>
+                        <input type="radio" name="choix_couleur" data-palette="3">
+                        <div class="theme theme3">
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                            <div></div>
+                        </div>
+                    </label>
+                </div>
             </div>
-            <div class="form-group">
-                <label>
-                    <input type="radio" name="choix_couleur">
-                    <div class="theme theme2">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </label>
-            </div>
-            <div class="form-group">
-                <label>
-                    <input type="radio" name="choix_couleur">
-                    <div class="theme theme3">
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                        <div></div>
-                    </div>
-                </label>
-            </div>
-
-            <button>Visualiser</button>
+            <input type="submit" value="Suivant" />
         </form>
     </main>
 </body>

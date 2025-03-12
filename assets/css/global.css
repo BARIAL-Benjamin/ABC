@@ -7,14 +7,14 @@
 /* Variables globales */
 :root {
     /* Palette de couleurs 1 */
-    --couleur-bleu-fonce: #295E73;
-    --couleur-bleu-inter: #7EADBF;
-    --couleur-bleu-clair: #9CCED9;
-    --couleur-beige: #F2EAD0;
-    --couleur-gris: #F2F2F2;
+    --couleur-bleu-fonce: #295e73;
+    --couleur-bleu-inter: #7eadbf;
+    --couleur-bleu-clair: #9cced9;
+    --couleur-beige: #f2ead0;
+    --couleur-gris: #f2f2f2;
 
     /* Typographie */
-    --police-principal: 'Play';
+    --police-principal: "Play";
 }
 
 /* Reset et styles de base */
@@ -25,7 +25,6 @@ body {
     margin: 0;
     padding: 0;
     line-height: 1.6;
-
 }
 
 /* Reset Liens */
@@ -71,7 +70,7 @@ form * {
     font-family: var(--police-principal), sans-serif;
 }
 
-form input[type=file] {
+form input[type="file"] {
     width: 100%;
 }
 
@@ -164,14 +163,15 @@ label:has(.theme) {
 
 .etudes,
 .experiences,
-.competences {
-
+.competences,
+.langues {
     .etude,
     .experience,
-    .competence {
+    .competence,
+    .langue {
         background-color: var(--couleur-bleu-clair);
         padding: 2rem;
-        border-radius: .5rem;
+        border-radius: 0.5rem;
         margin-bottom: 1.25rem;
     }
 }
