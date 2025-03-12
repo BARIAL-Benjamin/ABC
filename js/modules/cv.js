@@ -208,13 +208,13 @@ export default class CV {
 			radio.addEventListener('change', () => {
 				switch (radio.name) {
 					case 'choix_couleur':
-						this.setThemeInfo({ palette: radio.value })
+						this.setThemeInfo({ palette: `./themes/palette/${radio.value}/style.css` })
 						break;
 					case 'choix_template':
-						this.setThemeInfo({ template: radio.value })
+						this.setThemeInfo({ template: `./themes/template/${radio.value}/style.css` })
 						break;
 				}
-			})
+			});
 		}
 	}
 
