@@ -81,6 +81,7 @@
 
 /** Options pour la construction du bouton pour télécharger en HTML + CSS
  * @typedef { Object } HTMLButtonOptions
+ * @property { string } [template]
  * @property { string } [title]
  * @property { string[] } [styles]
  * @property { string | HTMLImageElement } [buttonText]
@@ -406,13 +407,15 @@ export default class CV {
 	 * @param { string[] } styles 
 	 * @param { HTMLButtonOptions } [options={}]
 	 */
-	async exportToHTML(where, content, template = this.#app.theme.template, options = {}) {
+	async exportToHTML(where, content, options = { template: this.#app.theme.template }) {
 		const { default: HTML } = await import("./htmlcss.mjs");
 		const title = options.title ?? `CV${this.#app.user.lastname ? ` - ${this.#app.user.lastname}` : ""}${this.#app.user.firstname ? ` ${this.#app.user.firstname}` : ""}`;
+		const themeTemplate = options.template ?? this.#app.theme.template ?? "";
+		delete options.template;
 		HTML.createButton(
 			where,
 			content,
-			template,
+			template = themeTemplate,
 			options = { ...options, title: title }
 		);
 	}
