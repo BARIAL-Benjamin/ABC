@@ -1,7 +1,7 @@
 import { GithubLink, LinkedInLink, WebSiteLink } from "./modules/social.mjs";
 import Settings from "./modules/settings.mjs";
 import PDF from "./modules/pdf.mjs";
-import HTMLCSS from "./modules/htmlcss.mjs";
+import HTML from "./modules/htmlcss.mjs";
 
 const formUser = document.querySelector("#social");
 /**
@@ -138,7 +138,7 @@ formUser.addEventListener("submit", async (e) => {
 	}
 
 	try {
-		await HTMLCSS.createButton(
+		await HTML.createButton(
 			document.getElementById('list'),
 			document.getElementById('cv')
 		);

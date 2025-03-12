@@ -62,7 +62,7 @@ export default class HTML {
         }
     }
 
-    /** Créer le bouton pour créer le HTMLCSS associé au contenu
+    /** Créer le bouton pour créer le HTML associé au contenu
      * @param {HTMLElement | Element} where Élément auquel le bouton va se référer
      * @param {HTMLElement | Element} content Élément à capturer
      * @param {string} template Lien vers le template

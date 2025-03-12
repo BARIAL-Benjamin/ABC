@@ -6,6 +6,7 @@
  * @property { string } [mail]
  * @property { string } [tel]
  * @property { string } [address]
+ * @property { string } [interests]
  * @property { string } [date_naissance]
  * @property { string } [photo] Stocker sous forme de texte en Base64
  * @property { SocialMedia } [social]
@@ -22,7 +23,7 @@
  * @property { string } [website]
  */
 
-/** Information relatif aux compétences de l'utilisateur
+/** Information relatif aux langues de l'utilisateur
  * @typedef { Object } Langue
  * @property { string } [nom]
  * @property { string } [niveau]
@@ -30,7 +31,7 @@
 
 /** Information relatif aux compétences de l'utilisateur
  * @typedef { Object } Competence
- * @property { string } [intitule]
+ * @property { string } [nom]
  * @property { string } [description]
  */
 
@@ -99,7 +100,12 @@ export default class CV {
 		'lastname', 'firstname', 'poste',
 		'address', 'tel', 'mail', 'linkedin',
 		'twitter', 'website', 'date_naissance',
-		"photo", 'langue_name', 'langue_level'
+		"photo", 'langue_name', 'langue_level',
+		'competence_name', 'competence_description',
+		'etude_date_deb', 'etude_date_fin', 'etude_lieu',
+		'etude_intitule', 'etude_description',
+		'experience_date_deb', 'experience_date_fin', 'experience_lieu',
+		'experience_intitule', 'experience_description', 'interests'
 	];
 
 	/**
@@ -259,6 +265,11 @@ export default class CV {
 				type: "poste"
 			},
 			{
+				champs: select('span.interests'),
+				value: user.interests,
+				type: "interests"
+			},
+			{
 				champs: select('span.tel'),
 				value: user.tel,
 				type: "tel"
@@ -335,7 +346,7 @@ export default class CV {
 						this.#app.user.etude.push({ [key]: value });
 					} else if (input.hasAttribute('data-experience')) {
 						this.#app.user.experience.push({ [key]: value });
-					} else if (input.hasAttribute('data-langue')) {
+					} else if (input.hasAttribute('data-langues')) {
 						this.#app.user.langue.push({ [key]: value });
 					} else {
 						this.#app.user[key] = value;
