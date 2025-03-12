@@ -1,4 +1,5 @@
 import CV from './modules/cv.mjs';
+
 const cv = new CV();
 
 const UserForm = document.getElementById('user');
@@ -13,3 +14,7 @@ if (Preview) {
 	cv.exportToHTML(Preview, Preview);
 	cv.exportToPDF(Preview, Preview);
 };
+
+/**
+ * Voir pour l'affichage des compétences, langues, études, experiences
+ */

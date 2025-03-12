@@ -16,6 +16,8 @@
  * @property { Competence[] } [competence]
  */
 
+import { isCallChain } from "typescript";
+
 /** Information relatif aux réseaux sociaux de l'utilisateur
  * @typedef { Object } SocialMedia
  * @property { string } [twitter]
@@ -199,6 +201,9 @@ export default class CV {
 		save ? this.saveDataApp(theme, "theme", this.#app) : this.#app.theme = { ...this.#app.theme, ...theme };
 	}
 
+	/** Récupère les informations relatif à l'utilisateur via un écoute d'un champ radio depuis un formulaire donnée
+	 * @param { HTMLFormElement } form
+	 */
 	setThemeByForm(form) {
 		const radio = form.querySelector('input[type="radio"]');
 		radio.addEventListener('change', () => {
@@ -246,7 +251,7 @@ export default class CV {
 		/** Définition d'un "champ"
 		 * @typedef Champ
 		 * @property { NodeListOf<Element> } champs Tableau des champs sélectionner
-		 * @property { string } value Valeur associé aux champs
+		 * @property { string | Etude[] | Langue[] | Competence[] | Experience[] } value Valeur associé aux champs
 		 * @property { string } type Type de champ
 		 */
 
@@ -318,16 +323,54 @@ export default class CV {
 				champs: select('#photo'),
 				value: user.photo,
 				type: "photo"
+			},
+			{
+				champs: select('#competences'),
+				value: user.competence,
+				type: 'competences'
+			},
+			{
+				champs: select('#etudes'),
+				value: user.etude,
+				type: 'etudes'
+			},
+			{
+				champs: select('#experiences'),
+				value: user.experience,
+				type: 'experiences'
+			},
+			{
+				champs: select('#langues'),
+				value: user.langue,
+				type: 'langues'
 			}
+		]
+
+		const specialType = [
+			'website', 'twitter', 'linkedin',
+			'competences', 'langues', 'etudes',
+			'experiences'
 		]
 
 		for (const { champs, value, type } of Object.values(TabChamps)) {
 			for (const champ of champs) {
-				if (type !== 'photo') {
-					champ.textContent = value ?? '';
-				} else {
+				if (type === 'photo') {
 					champ.src = value ?? '';
-					champ.alt = "User's photo"
+					champ.alt = "User's photo";
+				} else if (typeof value === 'string') {
+					champ.textContent = value;
+				} else if (specialType.includes(type) && Array.isArray(value)) {
+					value.forEach(item => {
+						const ul = document.createElement('ul');
+						Object.entries(item).forEach(([key, val]) => {
+							const li = document.createElement('li');
+							li.textContent = val;
+							ul.append(li);
+						});
+						champ.append(ul);
+					});
+				} else if (['twitter', 'linkedin', 'website'].includes(type)) {
+					champ.textContent = user.social[type];
 				}
 			}
 		}
