@@ -1,8 +1,6 @@
-import CV from './modules/cv.js';
+import CV from './modules/cv.min.js';
 
 const cv = new CV();
-
-console.log(cv);
 
 const UserForm = document.getElementById('user');
 const ThemeForm = document.getElementById('theme');

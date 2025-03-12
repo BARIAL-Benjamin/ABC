@@ -417,25 +417,13 @@ export default class CV {
 		});
 	}
 
-	/** Convertit une image en base64
-	 * @param {File} image Le fichier image à convertir
-	 * @returns Une promesse qui se résout avec la chaîne base64 de l'image
-	 */
-	static async #convertImageToBase64(image) {
-		return new Promise(_ => {
-			const r = new FileReader();
-			r.onloadend = () => _(r.result);
-			r.readAsDataURL(image);
-		});
-	}
-
 	/** Export le CV au format PDF
 	 * @param { HTMLElement | Element } where 
 	 * @param { HTMLElement | Element } content
 	 * @param { PDFButtonOptions } [options={}] 
 	 */
 	async exportToPDF(where, content, options = {}) {
-		const { default: PDF } = await import("./pdf.mjs");
+		const { default: PDF } = await import("./pdf.min.js");
 		const title = options.title ?? `CV${this.#app.user.lastname ? ` - ${this.#app.user.lastname}` : ""}${this.#app.user.firstname ? ` ${this.#app.user.firstname}` : ""}`;
 		PDF.createButton(
 			where,
@@ -451,7 +439,7 @@ export default class CV {
 	 * @param { HTMLButtonOptions } [options={}]
 	 */
 	async exportToHTML(where, content, options = {}) {
-		const { default: HTML } = await import("./htmlcss.mjs");
+		const { default: HTML } = await import("./htmlcss.min.js");
 		const title = options.title ?? `CV${this.#app.user.lastname ? ` - ${this.#app.user.lastname}` : ""}${this.#app.user.firstname ? ` ${this.#app.user.firstname}` : ""}`;
 		const themeTemplate = options.template ?? this.#app.theme.template ?? "";
 		delete options.template;
@@ -482,5 +470,17 @@ export default class CV {
 		const BirthDayDateAlreadyPass = m === 0 && n.getDate() < dn.getDate(); // Si 0 = même jour => Faux
 		let age = n.getFullYear() - dn.getFullYear(); // Calcul préliminaire de l'âge
 		return (BirthDayMonthAlreadyPass || BirthDayDateAlreadyPass) ? --age : age; // Re-calcul de l'âge selon condition
+	}
+
+	/** Convertit une image en base64
+	 * @param {File} image Le fichier image à convertir
+	 * @returns Une promesse qui se résout avec la chaîne base64 de l'image
+	 */
+	static async #convertImageToBase64(image) {
+		return new Promise(_ => {
+			const r = new FileReader();
+			r.onloadend = () => _(r.result);
+			r.readAsDataURL(image);
+		});
 	}
 }
