@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
+    <script type="module" src="./js/app.js" defer></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <ul id="list">
+        <li>
+            <form id="social">
+                <label for="media">Social Media</label>
+                <select name="media" id="media">
+                    <option value="LinkedIn">LinkedIn</option>
+                    <option value="Github">Github</option>
+                    <option value="WebSite">Website</option>
+                </select>
+                <label for="pseudo">Pseudonyme</label>
+                <input type="text" id="pseudo" name="pseudo" placeholder="Votre pseudo">
+                <label class="inactive" for="websiteLink">Lien de votre site web</label>
+                <input class="inactive" type="url" id="websiteLink" name="websiteLink" placeholder="https://example.com">
+                <input type="submit" placeholder="Ajouter">
+            </form>
+        </li>
+    </ul>
+    <div id="error"></div>
+    <section id="cv"></section>
+</body>
+
+</html>
