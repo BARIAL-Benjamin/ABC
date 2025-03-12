@@ -1,4 +1,4 @@
-import CV from './modules/cv.min.js';
+import CV from './modules/cv.js';
 
 const cv = new CV();
 

@@ -403,7 +403,7 @@ export default class CV {
 		form.addEventListener('submit', e => {
 			e.preventDefault();
 
-			document.querySelectorAll('input').forEach(async input => {
+			form.querySelectorAll('input').forEach(async input => {
 				const key = input.name;
 				const value = input.value;
 
@@ -416,7 +416,7 @@ export default class CV {
 
 					if (input.hasAttribute('data-social')) {
 						this.#app.user.social[key] = value;
-					} else if (input.hasAttribute('data-photo')) {
+					} else if (input.hasAttribute('data-photo')) {						
 						this.#app.user.photo = await CV.#convertImageToBase64(input.files[0]);
 					} else if (input.hasAttribute('data-competence')) {
 						this.#app.user.competence.push({ [key]: value });
@@ -433,7 +433,7 @@ export default class CV {
 			});
 
 			this.#saveDataAppToStorage();
-			location.href = "./form.theme.html";
+			// location.href = "./theme.form.html";
 		});
 	}
 
