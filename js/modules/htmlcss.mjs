@@ -7,6 +7,7 @@
 
 /**
  * @typedef { Object } HTMLButtonOptions
+ * @property { string } [template] Lien vers le template
  * @property { string } [title]
  * @property { string[] } [styles]
  * @property { string | HTMLImageElement } [buttonText]
@@ -65,18 +66,17 @@ export default class HTML {
     /** Créer le bouton pour créer le HTML associé au contenu
      * @param {HTMLElement | Element} where Élément auquel le bouton va se référer
      * @param {HTMLElement | Element} content Élément à capturer
-     * @param {string} template Lien vers le template
      * @param {HTMLButtonOptions} options Options pour la création du bouton HTMLCSS
      */
     static async createButton(
         where,
         content,
-        template,
         options = {
-            styles: [],
             position: "before",
             buttonText: "HTML + CSS ⭳",
-            title: document.title
+            styles: [],
+            title: document.title,
+            template: null,
         }
     ) {
         if (!where) throw new Error("L'élément référent ne peut pas être vide. Vérifier que votre élément existe ou est bien créé avant son appel.");
@@ -89,17 +89,17 @@ export default class HTML {
         button.title = options.title;
         button.type = "button";
 
-        delete options.buttonText;
-
-        const pos = {
-            before: "beforebegin",
-            start: "afterbegin",
-            end: "beforeend",
-            after: "afterend"
-        }[options.position ?? "before"] || "beforebegin";
+        delete options.buttonText;        
+		
+		const pos = {
+			before: "beforebegin",
+			start: "afterbegin",
+			end: "beforeend",
+			after: "afterend"
+		}[options.position ?? "before"] || "beforebegin";
 
         delete options.position;
-        button.addEventListener("click", async () => await HTML.generate(content, template, options));
+        button.addEventListener("click", async () => await HTML.generate(content, options.template, options));
         where.insertAdjacentElement(pos, button);
     }
 }

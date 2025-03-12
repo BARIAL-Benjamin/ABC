@@ -16,8 +16,6 @@
  * @property { Competence[] } [competence]
  */
 
-import { isCallChain } from "typescript";
-
 /** Information relatif aux réseaux sociaux de l'utilisateur
  * @typedef { Object } SocialMedia
  * @property { string } [twitter]
@@ -206,16 +204,18 @@ export default class CV {
 	 */
 	setThemeByForm(form) {
 		const radio = form.querySelector('input[type="radio"]');
-		radio.addEventListener('change', () => {
-			switch (radio.name) {
-				case 'choix_couleur':
-					this.setThemeInfo({ palette: radio.value })
-					break;
-				case 'choix_template':
-					this.setThemeInfo({ template: radio.value })
-					break;
-			}
-		})
+		if (radio) {
+			radio.addEventListener('change', () => {
+				switch (radio.name) {
+					case 'choix_couleur':
+						this.setThemeInfo({ palette: radio.value })
+						break;
+					case 'choix_template':
+						this.setThemeInfo({ template: radio.value })
+						break;
+				}
+			})
+		}
 	}
 
 	/** Récupère les informations relatif à l'utilisateur via un écoute d'un champ radio depuis un formulaire donnée
@@ -301,17 +301,17 @@ export default class CV {
 			},
 			{
 				champs: select('span.linkedin'),
-				value: user.social.linkedin,
+				value: user.social?.linkedin,
 				type: "linkedin"
 			},
 			{
 				champs: select('span.twitter'),
-				value: user.social.twitter,
+				value: user.social?.twitter,
 				type: "twitter"
 			},
 			{
 				champs: select('span.website'),
-				value: user.social.website,
+				value: user.social?.website,
 				type: "website"
 			},
 			{
@@ -450,16 +450,16 @@ export default class CV {
 	 * @param { string[] } styles 
 	 * @param { HTMLButtonOptions } [options={}]
 	 */
-	async exportToHTML(where, content, options = { template: this.#app.theme.template }) {
+	async exportToHTML(where, content, options = {}) {
 		const { default: HTML } = await import("./htmlcss.mjs");
 		const title = options.title ?? `CV${this.#app.user.lastname ? ` - ${this.#app.user.lastname}` : ""}${this.#app.user.firstname ? ` ${this.#app.user.firstname}` : ""}`;
 		const themeTemplate = options.template ?? this.#app.theme.template ?? "";
 		delete options.template;
+		
 		HTML.createButton(
 			where,
 			content,
-			template = themeTemplate,
-			options = { ...options, title: title }
+			options = { ...options, title: title, template: themeTemplate }
 		);
 	}
 
@@ -484,7 +484,3 @@ export default class CV {
 		return (BirthDayMonthAlreadyPass || BirthDayDateAlreadyPass) ? --age : age; // Re-calcul de l'âge selon condition
 	}
 }
-
-const cv = new CV();
-
-await cv.setUserInfoByForm(document.getElementById('user'));
