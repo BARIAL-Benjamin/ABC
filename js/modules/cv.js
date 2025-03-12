@@ -352,6 +352,13 @@ export default class CV {
 			'experiences'
 		]
 
+		if (this.#app.theme.palette) {
+			const link = document.createElement('link');
+			link.rel = "stylesheet";
+			link.href = this.#app.theme.palette;
+			document.head.append(link);
+		}
+
 		for (const { champs, value, type } of Object.values(TabChamps)) {
 			for (const champ of champs) {
 				if (type === 'photo') {
@@ -443,7 +450,7 @@ export default class CV {
 		const title = options.title ?? `CV${this.#app.user.lastname ? ` - ${this.#app.user.lastname}` : ""}${this.#app.user.firstname ? ` ${this.#app.user.firstname}` : ""}`;
 		const themeTemplate = options.template ?? this.#app.theme.template ?? "";
 		delete options.template;
-		
+
 		HTML.createButton(
 			where,
 			content,

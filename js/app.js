@@ -10,6 +10,9 @@ if (UserForm) await cv.setUserInfoByForm(UserForm);
 if (ThemeForm) cv.setThemeByForm(ThemeForm);
 
 if (Preview) {
+	cv.setThemeInfo({
+		palette: "./css/style.css"
+	})
 	cv.displayUserInfoOnPreview(Preview);
 	await cv.exportToHTML(Preview, Preview, { position: "after" });
 	await cv.exportToPDF(Preview, Preview, { position: "after" });
