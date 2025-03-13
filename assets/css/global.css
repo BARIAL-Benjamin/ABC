@@ -19,12 +19,14 @@
 
 /* Reset et styles de base */
 body {
+    box-sizing: border-box;
     font-family: var(--police-principal), sans-serif;
     color: var(--couleur-bleu-fonce);
     background-color: var(--couleur-gris);
     margin: 0;
     padding: 0;
     line-height: 1.6;
+    padding-inline: 1rem;
 }
 
 /* Reset Liens */
@@ -46,12 +48,14 @@ h3 {
 /* Header */
 header {
     max-width: 1200px;
-    width: 100%;
+    /* width: 100%; */
     margin: auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-top: 120px;
+    flex-flow: wrap-reverse;
+    /* padding-inline: 1rem; */
 
     .logo img {
         width: 150px;
@@ -161,10 +165,22 @@ label:has(.theme) {
     gap: 1rem;
 }
 
+.cta {
+    background-color: var(--couleur-bleu-fonce);
+    width: fit-content;
+    color: var(--couleur-gris);
+    padding-inline: 32px;
+    padding-block: 16px;
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.5;
+}
+
 .etudes,
 .experiences,
 .competences,
 .langues {
+
     .etude,
     .experience,
     .competence,
@@ -173,5 +189,32 @@ label:has(.theme) {
         padding: 2rem;
         border-radius: 0.5rem;
         margin-bottom: 1.25rem;
+    }
+}
+
+@media screen and (max-width:700px) {
+    body {
+        display: flex;
+        flex-flow: column;
+
+        aside,
+        header,
+        main {
+            width: 100%;
+        }
+
+        header {
+            margin-top: 1.5rem;
+        }
+
+        img {
+            max-width: 100%;
+            width: 100%;
+            /* height: auto; */
+        }
+    }
+
+    .competences {
+        flex-flow: wrap;
     }
 }
