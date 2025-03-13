@@ -6,32 +6,32 @@
     --theme1-couleur5: #F2F2F2;
 }
 
-body {
+body#theme {
     background-color: var(--theme1-couleur5);
     color: var(--theme1-couleur1);
-}
 
-aside {
-    background: var(--theme1-couleur1);
-    color: var(--theme1-couleur5);
-}
-
-a {
-    color: var(--theme1-couleur3);
-
-    &:hover {
-        color: var(--theme1-couleur1);
+    aside {
+        background: var(--theme1-couleur1);
+        color: var(--theme1-couleur5);
     }
-}
 
-.profile-picture {
-    background-color: var(--theme1-couleur4);
-}
+    a {
+        color: var(--theme1-couleur3);
 
-main {
+        &:hover {
+            color: var(--theme1-couleur1);
+        }
+    }
 
-    h1,
-    h2 {
-        color: var(--theme1-couleur2);
+    .profile-picture {
+        background-color: var(--theme1-couleur4);
+    }
+
+    main {
+
+        h1,
+        h2 {
+            color: var(--theme1-couleur2);
+        }
     }
 }
