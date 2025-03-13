@@ -7,10 +7,8 @@
 }
 
 body#theme {
-    body {
-        background-color: var(--theme2-couleur3);
-        color: var(--theme2-couleur1);
-    }
+    background-color: var(--theme2-couleur3);
+    color: var(--theme2-couleur1);
 
     aside {
         background: var(--theme2-couleur1);
