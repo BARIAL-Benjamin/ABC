@@ -419,15 +419,17 @@ export default class CV {
 						champ.target = '_blank';
 						champ.textContent = user.social[type];
 					} else {
-						champ.textContent = value;
+						if (value) champ.textContent = value;
 					}
 				} else if (specialType.includes(type) && Array.isArray(value)) {
 					value.forEach(item => {
 						const ul = document.createElement('ul');
 						Object.entries(item).forEach(([key, val]) => {
-							const li = document.createElement('li');
-							li.textContent = val;
-							ul.append(li);
+							if (val) {
+								const li = document.createElement('li');
+								li.textContent = val;
+								ul.append(li);
+							}
 						});
 						champ.append(ul);
 					});
@@ -501,19 +503,21 @@ export default class CV {
 			ulXP.textContent = `Langue : ${Number(key) + 1}`;
 			if (Object.keys(xp[key]).length > 0) {
 				Object.entries(xp[key]).forEach(([k, v]) => {
-					const li = document.createElement('li');
-					switch (k) {
-						case "nom":
-							li.textContent = `Nom : ${v}`;
-							break;
-						case "niveau":
-							li.textContent = `Niveau : ${v}`;
-							break;
-						default:
-							console.warn(`Clé (${k}) non pris en charge : ${v}`);
-							break;
+					if (v !== '') {
+						const li = document.createElement('li');
+						switch (k) {
+							case "nom":
+								li.textContent = `Nom : ${v}`;
+								break;
+							case "niveau":
+								li.textContent = `Niveau : ${v}`;
+								break;
+							default:
+								console.warn(`Clé (${k}) non pris en charge : ${v}`);
+								break;
+						}
+						ulXP.append(li);
 					}
-					ulXP.append(li);
 				})
 			}
 			liXP.append(ulXP);
@@ -540,28 +544,30 @@ export default class CV {
 
 			if (Object.keys(xp[key]).length > 0) {
 				Object.entries(xp[key]).forEach(([k, v]) => {
-					const li = document.createElement('li');
-					switch (k) {
-						case "intitule":
-							li.textContent = `Intitulé : ${v}`;
-							break;
-						case "lieu":
-							li.textContent = `Lieu : ${v}`;
-							break;
-						case "description":
-							li.textContent = `Description : ${v}`;
-							break;
-						case "date_deb":
-							li.textContent = `Date de début : ${v}`;
-							break;
-						case "date_fin":
-							li.textContent = `Date de fin : ${v}`;
-							break;
-						default:
-							console.warn(`Clé (${k}) non pris en charge : ${v}`);
-							break;
+					if (v !== '') {
+						const li = document.createElement('li');
+						switch (k) {
+							case "intitule":
+								li.textContent = `Intitulé : ${v}`;
+								break;
+							case "lieu":
+								li.textContent = `Lieu : ${v}`;
+								break;
+							case "description":
+								li.textContent = `Description : ${v}`;
+								break;
+							case "date_deb":
+								li.textContent = `Date de début : ${v}`;
+								break;
+							case "date_fin":
+								li.textContent = `Date de fin : ${v}`;
+								break;
+							default:
+								console.warn(`Clé (${k}) non pris en charge : ${v}`);
+								break;
+						}
+						ulXP.append(li);
 					}
-					ulXP.append(li);
 				})
 			}
 			liXP.append(ulXP);
@@ -588,28 +594,30 @@ export default class CV {
 
 			if (Object.keys(xp[key]).length > 0) {
 				Object.entries(xp[key]).forEach(([k, v]) => {
-					const li = document.createElement('li');
-					switch (k) {
-						case "intitule":
-							li.textContent = `Intitulé : ${v}`;
-							break;
-						case "lieu":
-							li.textContent = `Lieu : ${v}`;
-							break;
-						case "description":
-							li.textContent = `Description : ${v}`;
-							break;
-						case "date_deb":
-							li.textContent = `Date de début : ${v}`;
-							break;
-						case "date_fin":
-							li.textContent = `Date de fin : ${v}`;
-							break;
-						default:
-							console.warn(`Clé (${k}) non pris en charge : ${v}`);
-							break;
+					if (v !== '') {
+						const li = document.createElement('li');
+						switch (k) {
+							case "intitule":
+								li.textContent = `Intitulé : ${v}`;
+								break;
+							case "lieu":
+								li.textContent = `Lieu : ${v}`;
+								break;
+							case "description":
+								li.textContent = `Description : ${v}`;
+								break;
+							case "date_deb":
+								li.textContent = `Date de début : ${v}`;
+								break;
+							case "date_fin":
+								li.textContent = `Date de fin : ${v}`;
+								break;
+							default:
+								console.warn(`Clé (${k}) non pris en charge : ${v}`);
+								break;
+						}
+						ulXP.append(li);
 					}
-					ulXP.append(li);
 				})
 			}
 			liXP.append(ulXP);
@@ -635,19 +643,21 @@ export default class CV {
 			ulXP.textContent = `Compétence : ${Number(key) + 1}`;
 			if (Object.keys(xp[key]).length > 0) {
 				Object.entries(xp[key]).forEach(([k, v]) => {
-					const li = document.createElement('li');
-					switch (k) {
-						case "nom":
-							li.textContent = `Nom : ${v}`;
-							break;
-						case "description":
-							li.textContent = `Description : ${v}`;
-							break;
-						default:
-							console.warn(`Clé (${k}) non pris en charge : ${v}`);
-							break;
+					if (v !== '') {
+						const li = document.createElement('li');
+						switch (k) {
+							case "nom":
+								li.textContent = `Nom : ${v}`;
+								break;
+							case "description":
+								li.textContent = `Description : ${v}`;
+								break;
+							default:
+								console.warn(`Clé (${k}) non pris en charge : ${v}`);
+								break;
+						}
+						ulXP.append(li);
 					}
-					ulXP.append(li);
 				})
 			}
 			liXP.append(ulXP);
@@ -735,7 +745,7 @@ export default class CV {
 			const social = form.querySelector('#social');
 			const etudes = form.querySelector('#etudes');
 
-			global.querySelectorAll('input').forEach(input => {
+			global.querySelectorAll('input, textarea').forEach(input => {
 				const key = input.name;
 				if (CV.#userInputs.includes(key)) this.#app.user[key] = input.value;
 			});
@@ -745,7 +755,7 @@ export default class CV {
 				if (CV.#userInputs.includes(key)) this.#app.user.social[key] = input.value;
 			});
 
-			await Promise.all(Array.from(personal.querySelectorAll('input')).map(async input => {
+			await Promise.all(Array.from(personal.querySelectorAll('input, textarea')).map(async input => {
 				const key = input.name;
 				if (CV.#userInputs.includes(key) && key !== "photo") {
 					this.#app.user[key] = input.value;
@@ -897,12 +907,13 @@ export default class CV {
 		const { default: HTML } = await import("./htmlcss.min.js");
 		const title = options.title ?? `CV${this.#app.user.lastname ? ` - ${this.#app.user.lastname}` : ""}${this.#app.user.firstname ? ` ${this.#app.user.firstname}` : ""}`;
 		const themeTemplate = options.template ?? this.#app.theme.template ?? "";
+		const styles = options.styles ?? [this.#app.theme.palette] ?? [];
 		delete options.template;
 
 		HTML.createButton(
 			where,
 			content,
-			options = { ...options, title: title, template: themeTemplate }
+			options = { ...options, title: title, template: themeTemplate, styles: styles }
 		);
 	}
 

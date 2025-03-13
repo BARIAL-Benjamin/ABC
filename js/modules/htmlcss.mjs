@@ -31,7 +31,8 @@ export default class HTML {
     ) {
         try {
             const doc = (new DOMParser()).parseFromString(await fetch(template).then(r => r.text()), "text/html"); // Document du template
-
+            const contentDoc = (new DOMParser()).parseFromString(content.innerHTML, "text/html"); // Document du template
+            
             if (options.styles && options.styles.length !== 0) {
                 await Promise.all(options.styles.map(async style => {
                     const s = document.createElement('style');
@@ -42,20 +43,8 @@ export default class HTML {
 
             doc.title = options.title ?? document.title;
 
-            const html = `
-                <!DOCTYPE html>
-                <html lang="fr">
-                <head>
-                    ${doc.head.outerHTML}
-                </head>
-                <body>
-                    ${content.innerHTML}
-                </body>
-                </html>
-            `;
-
             const dl = document.createElement("a");
-            dl.href = URL.createObjectURL(new Blob([html], { type: options.type ?? 'text/html' }));
+            dl.href = URL.createObjectURL(new Blob([`${doc.head.outerHTML}${contentDoc.body.outerHTML}`], { type: options.type ?? 'text/html' }));
             dl.download = doc.title;
             dl.click();
         } catch (e) {
@@ -89,14 +78,14 @@ export default class HTML {
         button.title = options.title;
         button.type = "button";
 
-        delete options.buttonText;        
-		
-		const pos = {
-			before: "beforebegin",
-			start: "afterbegin",
-			end: "beforeend",
-			after: "afterend"
-		}[options.position ?? "before"] || "beforebegin";
+        delete options.buttonText;
+
+        const pos = {
+            before: "beforebegin",
+            start: "afterbegin",
+            end: "beforeend",
+            after: "afterend"
+        }[options.position ?? "before"] || "beforebegin";
 
         delete options.position;
         button.addEventListener("click", async () => await HTML.generate(content, options.template, options));
