@@ -268,7 +268,11 @@ export default class CV {
 	async displayUserInfoOnPreview(preview) {
 		function select(element) { return preview.querySelectorAll(element) }
 
-		const doc = (new DOMParser()).parseFromString(await fetch(this.#app.theme.template).then(r => r.text()), "text/html"); // Document du template
+		const theme = this.#app.theme;
+		const palette = theme.palette ?? './themes/palette/0/style.css';
+		const template = theme.template ?? './themes/templates/0/index.html';
+
+		const doc = (new DOMParser()).parseFromString(await fetch(template).then(r => r.text()), "text/html"); // Document du template
 
 		const user = this.#app.user;
 
@@ -386,10 +390,10 @@ export default class CV {
 			'experiences'
 		]
 
-		if (this.#app.theme.palette) {
+		if (palette) {
 			const link = doc.createElement('link');
 			link.rel = "stylesheet";
-			link.href = this.#app.theme.palette;
+			link.href = palette;
 			doc.head.append(link);
 		}
 
