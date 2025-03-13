@@ -265,8 +265,10 @@ export default class CV {
 	/** Affiche les informations relatif à l'utilisateur dans la pré-vue
 	 * @param {HTMLElement | Element } preview 
 	 */
-	displayUserInfoOnPreview(preview) {
+	async displayUserInfoOnPreview(preview) {
 		function select(element) { return preview.querySelectorAll(element) }
+
+		const doc = (new DOMParser()).parseFromString(await fetch(this.#app.theme.template).then(r => r.text()), "text/html"); // Document du template
 
 		const user = this.#app.user;
 
@@ -385,10 +387,10 @@ export default class CV {
 		]
 
 		if (this.#app.theme.palette) {
-			const link = document.createElement('link');
+			const link = doc.createElement('link');
 			link.rel = "stylesheet";
 			link.href = this.#app.theme.palette;
-			document.head.append(link);
+			doc.head.append(link);
 		}
 
 		for (const { champs, value, type } of Object.values(TabChamps)) {
@@ -413,6 +415,7 @@ export default class CV {
 				}
 			}
 		}
+		preview.appendChild(doc.documentElement);
 	}
 
 	/** Affiche les informations relatif à l'utilisateur et au thème dans le récapitulatif
