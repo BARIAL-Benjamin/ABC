@@ -415,11 +415,237 @@ export default class CV {
 		}
 	}
 
+	/** Affiche les informations relatif à l'utilisateur et au thème dans le récapitulatif
+	 * @param { HTMLElement | Element } summary 
+	 */
+	displayAllInfoOnSummary(summary) {
+		const h1 = document.createElement('h1');
+		h1.textContent = "Récapitulatif de vos informations";
+
+		const InfoPerso = this.#displayInfoPerso();
+		const InfoExperience = this.#displayExperience();
+		const InfoCompetence = this.#displayCompetence();
+		const InfoLangue = this.#displayLangue();
+		const InfoSocial = this.#displaySocial();
+
+		summary.append(h1, InfoPerso, InfoExperience, InfoCompetence, InfoLangue, InfoSocial)
+	}
+
+	#displaySocial() {
+		const section = document.createElement('section')
+		const h2 = document.createElement('h2');
+		h2.textContent = "Réseaux sociaux";
+		const ul = document.createElement('ul');
+
+		const xp = this.#app.user.social;
+
+		Object.entries(xp).forEach(([key, value]) => {
+			const li = document.createElement('li');
+			switch (key) {
+				case 'twitter':
+					li.textContent = `Twitter : ${value}`;
+					break;
+				case 'linkedin':
+					li.textContent = `LinkedIn : ${value}`;
+					break;
+				case 'website':
+					li.textContent = `Site web : ${value}`;
+					break;
+				default:
+					console.warn(`Clé (${key}) non pris en charge : ${value}`);
+					break;
+			}
+			ul.append(li);
+		});
+
+		section.append(h2, ul);
+		return section;
+
+	}
+
+	#displayLangue() {
+		const section = document.createElement('section')
+		const h2 = document.createElement('h2');
+		h2.textContent = "Langues";
+		const ul = document.createElement('ul');
+
+		const xp = this.#app.user.langue;
+
+		Object.keys(xp).forEach(key => {
+			const liXP = document.createElement('li');
+			const ulXP = document.createElement('ul');
+			ulXP.textContent = `Expérience : ${Number(key) + 1}`;
+			Object.entries(xp[key]).forEach(([k, v]) => {
+				const li = document.createElement('li');
+				switch (k) {
+					case "nom":
+						li.textContent = `Nom : ${v}`;
+						break;
+					case "niveau":
+						li.textContent = `Niveau : ${v}`;
+						break;
+					default:
+						console.warn(`Clé (${k}) non pris en charge : ${v}`);
+						break;
+				}
+				ulXP.append(li);
+			})
+			liXP.append(ulXP);
+			ul.append(liXP);
+		});
+
+		section.append(h2, ul);
+		return section;
+
+	}
+
+	#displayExperience() {
+		const section = document.createElement('section')
+		const h2 = document.createElement('h2');
+		h2.textContent = "Expériences";
+		const ul = document.createElement('ul');
+
+		const xp = this.#app.user.experience;
+
+		Object.keys(xp).forEach(key => {
+			const liXP = document.createElement('li');
+			const ulXP = document.createElement('ul');
+			ulXP.textContent = `Expérience : ${Number(key) + 1}`;
+			Object.entries(xp[key]).forEach(([k, v]) => {
+				const li = document.createElement('li');
+				switch (k) {
+					case "intitule":
+						li.textContent = `Intitulé : ${v}`;
+						break;
+					case "lieu":
+						li.textContent = `Lieu : ${v}`;
+						break;
+					case "description":
+						li.textContent = `Description : ${v}`;
+						break;
+					case "date_deb":
+						li.textContent = `Date de début : ${v}`;
+						break;
+					case "date_fin":
+						li.textContent = `Date de fin : ${v}`;
+						break;
+					default:
+						console.warn(`Clé (${k}) non pris en charge : ${v}`);
+						break;
+				}
+				ulXP.append(li);
+			})
+			liXP.append(ulXP);
+			ul.append(liXP);
+		});
+
+		section.append(h2, ul);
+		return section;
+
+	}
+
+	#displayCompetence() {
+		const section = document.createElement('section')
+		const h2 = document.createElement('h2');
+		h2.textContent = "Compétences";
+		const ul = document.createElement('ul');
+
+		const xp = this.#app.user.competence;
+
+		Object.keys(xp).forEach(key => {
+			const liXP = document.createElement('li');
+			const ulXP = document.createElement('ul');
+			ulXP.textContent = `Compétence : ${Number(key) + 1}`;
+			Object.entries(xp[key]).forEach(([k, v]) => {
+				const li = document.createElement('li');
+				switch (k) {
+					case "nom":
+						li.textContent = `Nom : ${v}`;
+						break;
+					case "description":
+						li.textContent = `Description : ${v}`;
+						break;
+					default:
+						console.warn(`Clé (${k}) non pris en charge : ${v}`);
+						break;
+				}
+				ulXP.append(li);
+			})
+			liXP.append(ulXP);
+			ul.append(liXP);
+		});
+
+		section.append(h2, ul);
+		return section;
+
+	}
+
+	/** Créer la section pour afficher les informations perso */
+	#displayInfoPerso() {
+		const section = document.createElement('section')
+		const h2 = document.createElement('h2');
+		h2.textContent = "Informations personnel";
+		const ul = document.createElement('ul');
+
+		Object.entries(this.#app.user).forEach(([key, value]) => {
+			if (typeof value !== 'object') {
+				const li = document.createElement('li');
+				switch (key) {
+					case 'photo':
+						const img = new Image();
+						img.src = value;
+						img.style.width = "200px";
+						img.style.height = "auto";
+						li.textContent = "Photo de profil : ";
+						li.append(img);
+						break;
+					case 'poste':
+						li.textContent = `Poste recherché : ${value}`;
+						break;
+					case 'lastname':
+						li.textContent = `Nom : ${value}`;
+						break;
+					case 'firstname':
+						li.textContent = `Prénom : ${value}`;
+						break;
+					case 'introduction':
+						li.textContent = `Introduction : ${value}`;
+						break;
+					case 'date_naissance':
+						const age = CV.computeAgeOfUser(value);
+						const displayAge = age >= 0 ? `(${age} ans)` : "";
+						const formatDate = value ? new Intl.DateTimeFormat('fr-FR', { dateStyle: "long" }).format(new Date(value)) : "";
+						li.textContent = `Date de naissance : ${formatDate} ${displayAge}`;
+						break;
+					case 'tel':
+						li.textContent = `Téléphone : ${value}`;
+						break;
+					case 'mail':
+						li.textContent = `Mail : ${value}`;
+						break;
+					case 'address':
+						li.textContent = `Adresse : ${value}`;
+						break;
+					case 'permis':
+						li.textContent = `Permis : ${value}`;
+						break;
+					default:
+						console.warn(`Clé (${key}) non pris en charge : ${value}`);
+						break;
+				}
+				ul.append(li);
+			}
+		})
+
+		section.append(h2, ul);
+		return section;
+	}
+
 	/** Récupère les informations relatif à l'utilisateur via un écoute d'un formulaire
 	 * @param { HTMLFormElement } form 
 	 */
 	async setUserInfoByForm(form) {
-		form.addEventListener('submit', e => {
+		form.addEventListener('submit', async e => {
 			e.preventDefault();
 
 			const global = form.querySelector('#global');
@@ -440,10 +666,14 @@ export default class CV {
 				if (CV.#userInputs.includes(key)) this.#app.user.social[key] = input.value;
 			});
 
-			personal.querySelectorAll('input').forEach(async input => {
-
-				if (CV.#userInputs.includes(input.name)) this.#app.user.photo = await CV.#convertImageToBase64(input.files[0]);
-			});
+			await Promise.all(Array.from(personal.querySelectorAll('input')).map(async input => {
+				const key = input.name;
+				if (CV.#userInputs.includes(key) && key !== "photo") {
+					this.#app.user[key] = input.value;
+				} else if (input.files.length > 0) {
+					this.#app.user[key] = await CV.#convertImageToBase64(input.files[0]);
+				}
+			}));
 
 			this.#app.user.experience = this.#getExperiencesFromElement(experiences);
 			this.#app.user.competence = this.#getCompetencesFromElement(competences);
