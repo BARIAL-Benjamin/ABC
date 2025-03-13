@@ -45,13 +45,12 @@
                 padding: 3rem;
             }
 
-            >.profile-picture {
-                border-radius: 100%;
-                margin-bottom: 40px;
+            .profile-picture {
+                border-radius: 50%;
                 width: 100%;
-
                 img {
                     width: 100%;
+                    border-radius: 50%;
                 }
             }
 
@@ -113,7 +112,7 @@
 
 <body id="theme">
     <aside>
-        <img class="profile-picture" id="photo">
+        <div class="profile-picture"><img id="photo"></div>
         <h2>Coordonnées</h2>
         <div class="coordonnees">
             <p><span class="adresse"></span></p>

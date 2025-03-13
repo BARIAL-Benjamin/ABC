@@ -48,15 +48,23 @@
             margin-bottom: 40px;
         }
 
-        button {
-            padding: 12px 20px;
-            margin-right: 8px;
-            outline: none;
-            border: none;
-            background-color: var(--couleur-bleu-fonce);
-            color: var(--couleur-gris);
-            font-weight: 700;
-            border-radius: .5rem;
+        #buttons {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+
+            > button {
+                padding: 12px 20px;
+                margin: 1.5em 1em;
+                outline: none;
+                border: none;
+                background-color: var(--couleur-bleu-fonce);
+                color: var(--couleur-gris);
+                font-weight: 700;
+                border-radius: .5rem;
+                cursor: pointer;
+            }
         }
     </style>
 </head>
@@ -75,6 +83,7 @@
     <main>
         <div id="summary"></div>
         <div id="preview"></div>
+        <div id="buttons"></div>
     </main>
 </body>
 
