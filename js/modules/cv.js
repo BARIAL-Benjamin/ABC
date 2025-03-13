@@ -266,7 +266,7 @@ export default class CV {
 	 * @param {HTMLElement | Element } preview 
 	 */
 	async displayUserInfoOnPreview(preview) {
-		function select(element) { return preview.querySelectorAll(element) }
+		function select(element) { return doc.querySelectorAll(element) }
 
 		const theme = this.#app.theme;
 		const palette = theme.palette ?? './themes/palette/0/style.css';
@@ -289,97 +289,97 @@ export default class CV {
 		const TabChamps = [
 			{
 				champs: select('span.lastname'),
-				value: user.lastname,
+				value: user.lastname ?? "Nom",
 				type: "lastname"
 			},
 			{
 				champs: select('span.firstname'),
-				value: user.firstname,
+				value: user.firstname ?? "Prénom",
 				type: "firstname"
 			},
 			{
 				champs: select('span.permis'),
-				value: user.permis,
+				value: user.permis ?? "",
 				type: "permis"
 			},
 			{
 				champs: select('span.introduction'),
-				value: user.introduction,
+				value: user.introduction ?? "",
 				type: "introduction"
 			},
 			{
 				champs: select('span.fullname'),
-				value: `${user.firstname} ${user.lastname}`,
+				value: `${user.firstname ?? "Prénom"} ${user.lastname ?? "Nom"}`,
 				type: "fullname"
 			},
 			{
 				champs: select('span.adresse'),
-				value: user.address,
+				value: user.address ?? "",
 				type: "adresse"
 			},
 			{
 				champs: select('span.poste'),
-				value: user.poste,
+				value: user.poste ?? "",
 				type: "poste"
 			},
 			{
 				champs: select('span.interests'),
-				value: user.interests,
+				value: user.interests ?? "",
 				type: "interests"
 			},
 			{
 				champs: select('span.tel'),
-				value: user.tel,
+				value: user.tel ?? "06 06 06 06 06",
 				type: "tel"
 			},
 			{
 				champs: select('span.mail'),
-				value: user.mail,
+				value: user.mail ?? "exemple@gmail.com",
 				type: "mail"
 			},
 			{
-				champs: select('span.linkedin'),
-				value: user.social?.linkedin,
+				champs: select('a.linkedin'),
+				value: user.social?.linkedin ?? "",
 				type: "linkedin"
 			},
 			{
-				champs: select('span.twitter'),
-				value: user.social?.twitter,
+				champs: select('a.twitter'),
+				value: user.social?.twitter ?? "",
 				type: "twitter"
 			},
 			{
-				champs: select('span.website'),
-				value: user.social?.website,
+				champs: select('a.website'),
+				value: user.social?.website ?? "",
 				type: "website"
 			},
 			{
 				champs: select('span.date_naissance'),
-				value: user.date_naissance,
+				value: user.date_naissance ?? "",
 				type: "date_naissance"
 			},
 			{
 				champs: select('#photo'),
-				value: user.photo,
+				value: user.photo ?? "",
 				type: "photo"
 			},
 			{
 				champs: select('#competences'),
-				value: user.competence,
+				value: user.competence ?? {},
 				type: 'competences'
 			},
 			{
 				champs: select('#etudes'),
-				value: user.etude,
+				value: user.etude ?? {},
 				type: 'etudes'
 			},
 			{
 				champs: select('#experiences'),
-				value: user.experience,
+				value: user.experience ?? {},
 				type: 'experiences'
 			},
 			{
 				champs: select('#langues'),
-				value: user.langue,
+				value: user.langue ?? {},
 				type: 'langues'
 			}
 		]
@@ -403,7 +403,24 @@ export default class CV {
 					champ.src = value ?? '';
 					champ.alt = "User's photo";
 				} else if (typeof value === 'string') {
-					champ.textContent = value;
+					if (['twitter', 'linkedin', 'website'].includes(type)) {
+						switch (type) {
+							case 'linkedin':
+								champ.href = `https://www.linkedin.com/in/${value}`;
+								break;
+							case 'twitter':
+								champ.href = `https://x.com/${value}`;
+								break;
+							case 'website':
+							default:
+								champ.href = value;
+								break;
+						}
+						champ.target = '_blank';
+						champ.textContent = user.social[type];
+					} else {
+						champ.textContent = value;
+					}
 				} else if (specialType.includes(type) && Array.isArray(value)) {
 					value.forEach(item => {
 						const ul = document.createElement('ul');
@@ -414,8 +431,6 @@ export default class CV {
 						});
 						champ.append(ul);
 					});
-				} else if (['twitter', 'linkedin', 'website'].includes(type)) {
-					champ.textContent = user.social[type];
 				}
 			}
 		}
@@ -429,13 +444,15 @@ export default class CV {
 		const h1 = document.createElement('h1');
 		h1.textContent = "Récapitulatif de vos informations";
 
-		const InfoPerso = this.#displayInfoPerso();
-		const InfoExperience = this.#displayExperience();
-		const InfoCompetence = this.#displayCompetence();
-		const InfoLangue = this.#displayLangue();
-		const InfoSocial = this.#displaySocial();
-
-		summary.append(h1, InfoPerso, InfoExperience, InfoCompetence, InfoLangue, InfoSocial)
+		summary.append(
+			h1,
+			this.#displayInfoPerso(),
+			this.#displayExperience(),
+			this.#displayEtude(),
+			this.#displayCompetence(),
+			this.#displayLangue(),
+			this.#displaySocial()
+		)
 	}
 
 	#displaySocial() {
@@ -481,22 +498,24 @@ export default class CV {
 		Object.keys(xp).forEach(key => {
 			const liXP = document.createElement('li');
 			const ulXP = document.createElement('ul');
-			ulXP.textContent = `Expérience : ${Number(key) + 1}`;
-			Object.entries(xp[key]).forEach(([k, v]) => {
-				const li = document.createElement('li');
-				switch (k) {
-					case "nom":
-						li.textContent = `Nom : ${v}`;
-						break;
-					case "niveau":
-						li.textContent = `Niveau : ${v}`;
-						break;
-					default:
-						console.warn(`Clé (${k}) non pris en charge : ${v}`);
-						break;
-				}
-				ulXP.append(li);
-			})
+			ulXP.textContent = `Langue : ${Number(key) + 1}`;
+			if (Object.keys(xp[key]).length > 0) {
+				Object.entries(xp[key]).forEach(([k, v]) => {
+					const li = document.createElement('li');
+					switch (k) {
+						case "nom":
+							li.textContent = `Nom : ${v}`;
+							break;
+						case "niveau":
+							li.textContent = `Niveau : ${v}`;
+							break;
+						default:
+							console.warn(`Clé (${k}) non pris en charge : ${v}`);
+							break;
+					}
+					ulXP.append(li);
+				})
+			}
 			liXP.append(ulXP);
 			ul.append(liXP);
 		});
@@ -518,30 +537,81 @@ export default class CV {
 			const liXP = document.createElement('li');
 			const ulXP = document.createElement('ul');
 			ulXP.textContent = `Expérience : ${Number(key) + 1}`;
-			Object.entries(xp[key]).forEach(([k, v]) => {
-				const li = document.createElement('li');
-				switch (k) {
-					case "intitule":
-						li.textContent = `Intitulé : ${v}`;
-						break;
-					case "lieu":
-						li.textContent = `Lieu : ${v}`;
-						break;
-					case "description":
-						li.textContent = `Description : ${v}`;
-						break;
-					case "date_deb":
-						li.textContent = `Date de début : ${v}`;
-						break;
-					case "date_fin":
-						li.textContent = `Date de fin : ${v}`;
-						break;
-					default:
-						console.warn(`Clé (${k}) non pris en charge : ${v}`);
-						break;
-				}
-				ulXP.append(li);
-			})
+
+			if (Object.keys(xp[key]).length > 0) {
+				Object.entries(xp[key]).forEach(([k, v]) => {
+					const li = document.createElement('li');
+					switch (k) {
+						case "intitule":
+							li.textContent = `Intitulé : ${v}`;
+							break;
+						case "lieu":
+							li.textContent = `Lieu : ${v}`;
+							break;
+						case "description":
+							li.textContent = `Description : ${v}`;
+							break;
+						case "date_deb":
+							li.textContent = `Date de début : ${v}`;
+							break;
+						case "date_fin":
+							li.textContent = `Date de fin : ${v}`;
+							break;
+						default:
+							console.warn(`Clé (${k}) non pris en charge : ${v}`);
+							break;
+					}
+					ulXP.append(li);
+				})
+			}
+			liXP.append(ulXP);
+			ul.append(liXP);
+		});
+
+		section.append(h2, ul);
+		return section;
+
+	}
+
+	#displayEtude() {
+		const section = document.createElement('section')
+		const h2 = document.createElement('h2');
+		h2.textContent = "Études";
+		const ul = document.createElement('ul');
+
+		const xp = this.#app.user.etude;
+
+		Object.keys(xp).forEach(key => {
+			const liXP = document.createElement('li');
+			const ulXP = document.createElement('ul');
+			ulXP.textContent = `Étude : ${Number(key) + 1}`;
+
+			if (Object.keys(xp[key]).length > 0) {
+				Object.entries(xp[key]).forEach(([k, v]) => {
+					const li = document.createElement('li');
+					switch (k) {
+						case "intitule":
+							li.textContent = `Intitulé : ${v}`;
+							break;
+						case "lieu":
+							li.textContent = `Lieu : ${v}`;
+							break;
+						case "description":
+							li.textContent = `Description : ${v}`;
+							break;
+						case "date_deb":
+							li.textContent = `Date de début : ${v}`;
+							break;
+						case "date_fin":
+							li.textContent = `Date de fin : ${v}`;
+							break;
+						default:
+							console.warn(`Clé (${k}) non pris en charge : ${v}`);
+							break;
+					}
+					ulXP.append(li);
+				})
+			}
 			liXP.append(ulXP);
 			ul.append(liXP);
 		});
@@ -563,21 +633,23 @@ export default class CV {
 			const liXP = document.createElement('li');
 			const ulXP = document.createElement('ul');
 			ulXP.textContent = `Compétence : ${Number(key) + 1}`;
-			Object.entries(xp[key]).forEach(([k, v]) => {
-				const li = document.createElement('li');
-				switch (k) {
-					case "nom":
-						li.textContent = `Nom : ${v}`;
-						break;
-					case "description":
-						li.textContent = `Description : ${v}`;
-						break;
-					default:
-						console.warn(`Clé (${k}) non pris en charge : ${v}`);
-						break;
-				}
-				ulXP.append(li);
-			})
+			if (Object.keys(xp[key]).length > 0) {
+				Object.entries(xp[key]).forEach(([k, v]) => {
+					const li = document.createElement('li');
+					switch (k) {
+						case "nom":
+							li.textContent = `Nom : ${v}`;
+							break;
+						case "description":
+							li.textContent = `Description : ${v}`;
+							break;
+						default:
+							console.warn(`Clé (${k}) non pris en charge : ${v}`);
+							break;
+					}
+					ulXP.append(li);
+				})
+			}
 			liXP.append(ulXP);
 			ul.append(liXP);
 		});
@@ -704,10 +776,13 @@ export default class CV {
 		if (element) {
 			element.querySelectorAll('.langue').forEach(el => {
 				if (el) {
-					langues.push({
+					const langue = {
 						nom: el.querySelector('input[name="langue_name"]')?.value,
 						niveau: el.querySelector('input[name="langue_level"]')?.value
-					});
+					};
+					if (langue.nom || langue.niveau) {
+						langues.push(langue);
+					}
 				}
 			});
 		}
@@ -726,13 +801,16 @@ export default class CV {
 		if (element) {
 			element.querySelectorAll('.etude').forEach(el => {
 				if (el) {
-					etudes.push({
+					const etude = {
 						date_deb: el.querySelector('input[name="etude_date_deb"]')?.value,
 						date_fin: el.querySelector('input[name="etude_date_fin"]')?.value,
 						lieu: el.querySelector('input[name="etude_lieu"]')?.value,
 						intitule: el.querySelector('input[name="etude_intitule"]')?.value,
 						description: el.querySelector('textarea[name="etude_description"]')?.value
-					});
+					};
+					if (etude.date_deb || etude.date_fin || etude.lieu || etude.intitule || etude.description) {
+						etudes.push(etude);
+					}
 				}
 			});
 		}
@@ -751,10 +829,15 @@ export default class CV {
 		if (element) {
 			element.querySelectorAll('.competence').forEach(el => {
 				if (el) {
-					competences.push({
+					const competence = {
 						nom: el.querySelector('input[name="competence_name"]')?.value,
 						description: el.querySelector('textarea[name="competence_description"]')?.value
-					});
+					};
+
+					// Vérifie si au moins un des champs est rempli
+					if (competence.nom || competence.description) {
+						competences.push(competence);
+					}
 				}
 			});
 		}
@@ -773,13 +856,16 @@ export default class CV {
 		if (element) {
 			element.querySelectorAll('.experience').forEach(el => {
 				if (el) {
-					experiences.push({
+					const experience = {
 						intitule: el.querySelector('input[name="experience_intitule"]')?.value,
 						lieu: el.querySelector('input[name="experience_lieu"]')?.value,
 						date_deb: el.querySelector('input[name="experience_date_deb"]')?.value,
 						date_fin: el.querySelector('input[name="experience_date_fin"]')?.value,
 						description: el.querySelector('textarea[name="experience_description"]')?.value
-					});
+					};
+					if (experience.intitule || experience.lieu || experience.date_deb || experience.date_fin || experience.description) {
+						experiences.push(experience);
+					}
 				}
 			});
 		}

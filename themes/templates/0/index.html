@@ -5,264 +5,151 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        /* Import des polices */
-        @import url(https://fonts.bunny.net/css?family=play:400,700);
+        #theme {
+            /* Import des polices */
+            @import url(https://fonts.bunny.net/css?family=play:400,700);
 
-        * {
-            margin: 0;
-            padding: 0;
-        }
-
-        :root {
-            /* Typographie */
             --police-principal: 'Play';
-        }
-
-        body {
             font-family: var(--police-principal), sans-serif;
             box-sizing: border-box;
             display: flex;
-        }
 
-        h1 {
-            margin-top: 40px;
-            text-wrap: balance;
-        }
+            >* {
+                margin: 0;
+                padding: 0;
+            }
 
-        h2 {
-            margin-block: 1.25rem;
-            text-wrap: balance;
-        }
+            >h1 {
+                margin-top: 40px;
+                text-wrap: balance;
+            }
 
-        aside {
-            padding: 3rem;
-            /* padding-inline: 1rem; */
-            /* padding-block: 3rem; */
+            >h2 {
+                margin-block: 1.25rem;
+                text-wrap: balance;
+            }
 
-            width: 30%;
-            background-color: #D9D9D9;
-            min-height: 100%;
-        }
+            >aside {
+                padding: 3rem;
+                /* padding-inline: 1rem; */
+                /* padding-block: 3rem; */
 
-        main {
-            width: 100%;
-            min-height: 100vh;
-            padding: 3rem;
-        }
+                width: 30%;
+                background-color: #D9D9D9;
+                min-height: 100%;
+            }
 
-        .profile-picture {
-            border-radius: 100%;
-            margin-bottom: 40px;
-            width: 100%;
-
-            img {
+            >main {
                 width: 100%;
+                min-height: 100vh;
+                padding: 3rem;
             }
-        }
 
-        .competences {
-            display: flex;
-            gap: 5rem;
+            >.profile-picture {
+                border-radius: 100%;
+                margin-bottom: 40px;
+                width: 100%;
 
-            ul {
-                margin-left: 1rem;
-            }
-        }
-
-        .competences h4 {
-            margin-bottom: 1rem;
-        }
-
-        .experience {
-            margin-bottom: 1rem;
-        }
-
-        .experience-header {
-            display: flex;
-            justify-content: space-between;
-            flex-flow: wrap;
-            gap: .5rem;
-        }
-
-        .formations {
-            &>div {
-                margin-bottom: .5rem;
-            }
-        }
-
-        @media screen and (max-width:700px) {
-            body {
-                display: flex;
-                flex-flow: column;
-
-                aside,
-                main {
-                    padding: 1rem;
-                    width: auto;
+                img {
+                    width: 100%;
                 }
             }
 
-            .competences {
-                flex-flow: wrap;
-            }
-        }
+            >.competences {
+                display: flex;
+                gap: 5rem;
 
-        p {
-            width: fit-content;
+                ul {
+                    margin-left: 1rem;
+                }
+            }
+
+            >.competences h4 {
+                margin-bottom: 1rem;
+            }
+
+            >.experience {
+                margin-bottom: 1rem;
+            }
+
+            >.experience-header {
+                display: flex;
+                justify-content: space-between;
+                flex-flow: wrap;
+                gap: .5rem;
+            }
+
+            >.formations {
+                &>div {
+                    margin-bottom: .5rem;
+                }
+            }
+
+            @media screen and (max-width:700px) {
+                #theme {
+                    display: flex;
+                    flex-flow: column;
+
+                    aside,
+                    main {
+                        padding: 1rem;
+                        width: auto;
+                    }
+                }
+
+                >.competences {
+                    flex-flow: wrap;
+                }
+            }
+
+            >p {
+                width: fit-content;
+            }
+
         }
     </style>
-    <!-- ICI Palette CSS -->
     <title>THEME 1</title>
 </head>
 
-<body>
+<body id="theme">
     <aside>
-        <div class="profile-picture" id="photo">
-            <img src="./assets/img/fluent-color_person-16.svg" alt="">
-        </div>
+        <img class="profile-picture" id="photo">
         <h2>Coordonnées</h2>
         <div class="coordonnees">
-            <p><span class="adresse">adresse</span></p>
-            <p><span class="mail">email</span></p>
-            <p><span class="linkedin">linkedin</span></p>
-            <p><span class="twitter">twitter</span></p>
-            <p><span class="website">website</span></p>
-            <p><span class="date_naissance">date naissance</span></p>
+            <p><span class="adresse"></span></p>
+            <p><span class="mail"></span></p>
+            <p><span class="linkedin"></span></p>
+            <p><span class="twitter"></span></p>
+            <p><span class="website"></span></p>
+            <p><span class="date_naissance"></span></p>
+        </div>
+
+        <h2>Réseaux sociaux</h2>
+        <div class="langues" id="social">
+            <p><a class="linkedin"></a></p>
+            <p><a class="twitter"></a></p>
+            <p><a class="website"></a></p>
         </div>
 
         <h2>Langues</h2>
-        <div class="langues" id="langues">
-            <p>Langue 1</p>
-            <p>Langue 2</p>
-            <p>Langue 3</p>
-            <p>Langue 4</p>
-        </div>
-
-        <h2>Formations</h2>
-        <div class="formations" id="etudes">
-            <div>
-                <p>Diplome</p>
-                <p>Ecole</p>
-                <p>Lieu, Date</p>
-            </div>
-            <div>
-                <p>Diplome</p>
-                <p>Ecole</p>
-                <p>Lieu, Date</p>
-            </div>
-            <div>
-                <p>Diplome</p>
-                <p>Ecole</p>
-                <p>Lieu, Date</p>
-            </div>
-            <div>
-                <p>Diplome</p>
-                <p>Ecole</p>
-                <p>Lieu, Date</p>
-            </div>
-            <div>
-                <p>Diplome</p>
-                <p>Ecole</p>
-                <p>Lieu, Date</p>
-            </div>
-        </div>
+        <div class="langues" id="langues"></div>
 
         <h2>Centres d'intérêt</h2>
-        <div>
-            <p><span class="interests">lorem</span></p>
-        </div>
+        <p><span class="interests"></span></p>
     </aside>
     <main>
-        <h1><span class="lastname">Nom</span> <span class="firstname">Prénom</span></h1>
+        <h1><span class="lastname"></span> <span class="firstname"></span></h1>
         <h2><span class="poste"></span></h2>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, perspiciatis.</p>
+        <p class="introduction"></p>
 
-        <h2>Réalisations</h2>
-        <div class="projets">
-            <p><a href="#">Site Web</a></p>
-            <p><a href="#">Site Web</a></p>
-            <p><a href="#">Site Web</a></p>
-        </div>
         <h2>Compétences</h2>
-        <div class="competences" id="competences">
-            <div>
-                <h4>Savoir-être</h4>
-                <ul>
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Lorem ipsum dolor sit amet</li>
-                </ul>
-            </div>
-            <div>
-                <h4>Savoir-faire</h4>
-                <ul>
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Lorem ipsum dolor sit amet</li>
-                    <li>Lorem ipsum dolor sit amet</li>
-                </ul>
-            </div>
-        </div>
+        <div class="competences" id="competences"></div>
 
-        <h2>Experiences professionnels</h2>
+        <h2>Experiences</h2>
+        <div id="experiences"></div>
 
-        <div id="competences">
-            <div class="experience">
-                <div class="experience-header">
-                    <h3>Intitulé - Lieu</h3>
-                    <h3>Date</h3>
-                </div>
-                <p>Lorem ipsum dolor sit amet.</p>
-            </div>
-
-            <div class="experience">
-                <div class="experience-header">
-                    <h3>Intitulé - Lieu</h3>
-                    <h3>Date</h3>
-                </div>
-                <p>Lorem ipsum dolor sit amet.</p>
-            </div>
-            <div class="experience">
-                <div class="experience-header">
-                    <h3>Intitulé - Lieu</h3>
-                    <h3>Date</h3>
-                </div>
-                <p>Lorem ipsum dolor sit amet.</p>
-            </div>
-            <div class="experience">
-                <div class="experience-header">
-                    <h3>Intitulé - Lieu</h3>
-                    <h3>Date</h3>
-                </div>
-                <p>Lorem ipsum dolor sit amet.</p>
-            </div>
-            <div class="experience">
-                <div class="experience-header">
-                    <h3>Intitulé - Lieu</h3>
-                    <h3>Date</h3>
-                </div>
-                <p>Lorem ipsum dolor sit amet.</p>
-            </div>
-            <div class="experience">
-                <div class="experience-header">
-                    <h3>Intitulé - Lieu</h3>
-                    <h3>Date</h3>
-                </div>
-                <p>Lorem ipsum dolor sit amet.</p>
-            </div>
-        </div>
+        <h2>Formations</h2>
+        <div class="formations" id="etudes"></div>
     </main>
     <footer>
 
